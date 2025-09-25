@@ -5,6 +5,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+Pensando no intuito do projeto, a Fila é a estrutura de dados
+fundamental para o gerenciamento da Arena. Ela garante que as formas
+geométricas sejam processadas na ordem exata em que foram lançadas,
+obedecendo à regra "primeiro a entrar, primeiro a sair" (FIFO).
+
+- Ao serem lançadas por um Disparador, as Formas são inseridas no fim da Fila da Arena.
+- Para o processamento de colisões ou outras ações, as Formas são removidas do início da Fila.
+
+O TAD Arena, portanto, utilizará esta Fila como sua principal estrutura de dados interna.
+*/
+
 typedef void* FILA;
 typedef void* Forma;
 
@@ -13,8 +25,8 @@ typedef void* Forma;
  * 
  * @return Retorna um ponteiro para fila criada.
  *
- * @details Aloca dinamicamente memória para a Fila, atribuindo ponteiros 
- * para o início e fim da Fila.
+ * @details Aloca dinamicamente memória para a fila, atribuindo ponteiros 
+ * para o início e fim da fila.
  *
  * @warning Caso a alocacao de memoria dê errado, encerra o programa.
  */
@@ -34,7 +46,7 @@ FILA criarFila();
  *
  * @warning Caso a alocacao de memoria dê errado, encerra o programa.
  */
-void insereElemFila (FILA *f, Forma g)
+void insereElemFila(FILA *f, Forma g)
 
 /**
  * @brief Remove um elemento do início da fila (Modelo FIFO).
@@ -46,10 +58,10 @@ void insereElemFila (FILA *f, Forma g)
  *
  * @warning Fecha o programa caso a fila esteja vazia.
  */
-void removeElemFila (FILA *f)
+void removeElemFila(FILA *f)
 
 /**
- * @brief 'Pega' o primeiro da fila sem tirá-lo.
+ * @brief 'Pega' o primeiro elemento da fila sem tirá-lo.
  *
  * @param FILA Ponteiro que indica em qual fila o elemento será obtido.
  * 
@@ -57,7 +69,7 @@ void removeElemFila (FILA *f)
  *
  * @warning Retorna um ponteiro NULL caso fila vazia.
  */
-Form getFirstElem (FILA *f)
+Form getFirstElem(FILA *f)
 
 /**
  * @brief 'Pega' o segundo elemento da fila sem tirá-lo.
@@ -68,7 +80,7 @@ Form getFirstElem (FILA *f)
  *
  * @warning Caso a fila possua apenas um elemento, uma mensagem será exibida e a função fechada.
  */
-Form getNextElem (FILA *f)
+Form getNextElem(FILA *f)
 
 /**
  * @brief Libera memória da fila e de seus nós (elementos).
