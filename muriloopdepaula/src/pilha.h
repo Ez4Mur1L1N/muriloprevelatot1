@@ -27,7 +27,6 @@ typedef void* Forma;
  *
  * @warning Caso a alocacao de memoria dê errado, encerra o programa.
  */
-
 PILHA criarPilha();
 
 /**
@@ -43,7 +42,7 @@ PILHA criarPilha();
  *
  * @warning Caso a alocacao de memoria dê errado, encerra o programa.
  */
-void push(PILHA *p, Forma g)
+void push(PILHA p, Forma g);
 
 /**
  * @brief Remove um elemento do topo da pilha (desempilha).
@@ -54,7 +53,7 @@ void push(PILHA *p, Forma g)
  * 
  * @warning Fecha o programa caso a fila esteja vazia.
  */
-void pop(PILHA *p)
+void pop(PILHA p);
 
 /**
  * @brief 'Pega' o primeiro elemento da pilha sem tirá-lo.
@@ -65,7 +64,7 @@ void pop(PILHA *p)
  *
  * @warning Retorna um ponteiro NULL caso pilha vazia.
  */
-Form getTopo(PILHA *p)
+Form getTopo(PILHA p);
 
 /**
  * @brief Libera memória da pilha e de seus nós (elementos).
@@ -75,6 +74,6 @@ Form getTopo(PILHA *p)
  * @details Percorre cada nó e vai desalocando memória (free).
  * Por fim, reajusta os ponteiros inicio e final para NULL.
  */
-void apagaPilha(PILHA *p);
+void apagaPilha(PILHA p);
 
 #endif

@@ -30,7 +30,6 @@ typedef void* Forma;
  *
  * @warning Caso a alocacao de memoria dê errado, encerra o programa.
  */
-
 FILA criarFila();
 
 /**
@@ -46,7 +45,7 @@ FILA criarFila();
  *
  * @warning Caso a alocacao de memoria dê errado, encerra o programa.
  */
-void insereElemFila(FILA *f, Forma g)
+void insereElemFila(FILA f, Forma g);
 
 /**
  * @brief Remove um elemento do início da fila (Modelo FIFO).
@@ -58,7 +57,7 @@ void insereElemFila(FILA *f, Forma g)
  *
  * @warning Fecha o programa caso a fila esteja vazia.
  */
-void removeElemFila(FILA *f)
+void removeElemFila(FILA f);
 
 /**
  * @brief 'Pega' o primeiro elemento da fila sem tirá-lo.
@@ -69,7 +68,7 @@ void removeElemFila(FILA *f)
  *
  * @warning Retorna um ponteiro NULL caso fila vazia.
  */
-Form getFirstElem(FILA *f)
+Form getFirstElem(FILA f);
 
 /**
  * @brief 'Pega' o segundo elemento da fila sem tirá-lo.
@@ -80,7 +79,7 @@ Form getFirstElem(FILA *f)
  *
  * @warning Caso a fila possua apenas um elemento, uma mensagem será exibida e a função fechada.
  */
-Form getNextElem(FILA *f)
+Form getNextElem(FILA f);
 
 /**
  * @brief Libera memória da fila e de seus nós (elementos).
@@ -90,6 +89,6 @@ Form getNextElem(FILA *f)
  * @details Percorre cada nó e vai desalocando memória (free).
  * Por fim, reajusta os ponteiros inicio e final para NULL.
  */
-void apagaFila(FILA *f)
+void apagaFila(FILA f);
 
 #endif
