@@ -2,7 +2,7 @@
 #define CIRCULO_H
 
 /*
-TAD que vai representar a forma geométrica do Círculo.
+TAD que vai representar a forma geométrica do círculo.
 A coordenada âncora dessa forma é seu centro (x,y) e sua
 dimensão é definida pelo raio
 
@@ -14,11 +14,11 @@ typedef void* Circulo;
  * @brief Função que cria um círculo com os atributos indicados.
  *
  * @param id Indica o "ID" da forma geométrica.
- * @param x Indica a coordenada X (plano cartesiano) do centro. 
- * @param y Indica a coordenada Y (plano cartesiano) do centro.
+ * @param x Indica a coordenada X (plano cartesiano) do centro do círculo. 
+ * @param y Indica a coordenada Y (plano cartesiano) do centro do círculo.
  * @param r Indica o raio do círculo.
  * @param corB Indica a cor da borda do círculo.
- * @param corP Indica a cor do preenchimento.
+ * @param corP Indica a cor do preenchimento do círculo.
  *
  * @return Retorna o ponteiro para o círculo criado.
  *
@@ -65,7 +65,7 @@ double getYCirculo(Circulo c);
  *
  * @param Circulo Ponteiro do círculo analisado.
  * 
- * @return Um double que representa as dimensões do raio da forma.
+ * @return Um double que representa a dimensão do raio da forma.
  */
 double getRCirculo(Circulo c);
 
@@ -90,18 +90,18 @@ char *getCorPCirculo(Circulo c);
 /**
  * @brief Função que calcula a área do círculo.
  *
- * @param r Raio do círculo.
+ * @param Circulo Ponteiro para o círculo que será calculado a área.
  *
  * @return A área do círculo. 
  */
-double calcAreaCirculo(double r);
+double calcAreaCirculo(Circulo c);
 
 /**
  * @brief Função que define uma nova coordenada para 'X'.
  *
  * @param Circulo Ponteiro do círculo analisado.
  *
- * @param x Novo valor para a coordenada 'X'.
+ * @param xNovo Novo valor para a coordenada 'X'.
  */
 void setXCirculo(Circulo c, double xNovo);
 
@@ -110,7 +110,7 @@ void setXCirculo(Circulo c, double xNovo);
  *
  * @param Circulo Ponteiro do círculo analisado.
  *
- * @param x Novo valor para a coordenada 'Y'.
+ * @param yNovo Novo valor para a coordenada 'Y'.
  */
 void setYCirculo(Circulo c, double yNovo);
 
@@ -119,7 +119,7 @@ void setYCirculo(Circulo c, double yNovo);
  *
  * @param Circulo Ponteiro do círculo analisado.
  *
- * @param x Novo valor para o raio.
+ * @param raioNovo Novo valor para o raio.
  */
 void setRCirculo(Circulo c, double raioNovo);
 
@@ -128,17 +128,17 @@ void setRCirculo(Circulo c, double raioNovo);
  *
  * @param Circulo Ponteiro do círculo analisado.
  *
- * @param x Nova cor para a borda do círculo.
+ * @param corBNova Nova cor para a borda do círculo.
  */
-void setCorBCirculo(Circulo c, double raioNovo);
+void setCorBCirculo(Circulo c, char *corBNova);
 
 /**
  * @brief Função que define uma nova cor para o preenchimento do círculo.
  *
  * @param Circulo Ponteiro do círculo analisado.
  *
- * @param x Nova cor para o preenchimento do círculo.
+ * @param corPNova Nova cor para o preenchimento do círculo.
  */
-void setCorPCirculo(Circulo c, double raioNovo);
+void setCorPCirculo(Circulo c, char *corPNova);
 
 #endif
