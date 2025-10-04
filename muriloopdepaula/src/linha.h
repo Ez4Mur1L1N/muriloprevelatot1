@@ -12,7 +12,7 @@ typedef void* Linha;
 /**
  * @brief Função que cria uma linha com os atributos indicados.
  * 
- * @param i Indica o ID da linha.
+ * @param id Indica o ID da forma.
  * @param x1 Indica a coordenada "X" do início da linha.
  * @param y1 Indica a coordenada "Y" do início da linha.
  * @param x2 Indica a coordenada "X" do final da linha.
@@ -23,19 +23,19 @@ typedef void* Linha;
  *
  * @details Cria uma linha, inicializa seus atributos e retorna um ponteiro para ele. 
  */
-Linha criarLinha(int i, double x1, double y1, double x2, double y2, char *cor);
+Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor);
 
 /**
- * @brief Função que libera toda memória alocada para a linha
+ * @brief Função que libera toda memória alocada para a linha.
  * 
- * @param l Ponteiro da linha analisada.
+ * @param Linha Ponteiro da linha analisada.
  */
 void destroiLinha(Linha l);
 
 /**
  * @brief Função que 'pega' o ID da linha.
  * 
- * @param l Ponteiro da linha analisada.
+ * @param Linha Ponteiro da linha analisada.
  *
  * @return Um inteiro que representa o id da linha.
  */
@@ -93,7 +93,7 @@ char *getCorLinha(Linha l);
  * 
  * @return Um double que representa a área da linha.
  *
- * @details (2*comprimento da linha).
+ * @details (2 * comprimento da linha).
  */
 double calcAreaLinha(Linha l);
 
