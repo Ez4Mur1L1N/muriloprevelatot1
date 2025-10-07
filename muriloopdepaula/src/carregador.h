@@ -16,7 +16,7 @@ typedef void* Carregador;
  * 
  * @return Ponteiro para o novo carregador. 
  */
-Carregador criaCarregador();
+Carregador criarCarregador();
 
 /**
  * @brief Libera a memória associada ao carregador e aos elementos contidos nele.
