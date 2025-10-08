@@ -10,6 +10,7 @@ typedef struct nos{
 typedef NOS *NO;
 
 typedef struct{
+    int tamanho;
     NO topo;
 } PILHAP;
 
@@ -26,13 +27,14 @@ PILHA criaPilha(){
         exit(1);
     }
     pi->topo = NULL;
+    pi->tamanho = 0;
     return pi;
 }
 
 int pilhaVazia(PILHA p){
     PILHAP* pi = (PILHAP*) p;
 
-    if(pi->topo == NULL){
+    if(pi->tamanho == 0){
         return 1;
     } else{
         return 0;
@@ -50,6 +52,7 @@ void push(PILHA p, void *elemento){
     novo->elemento = elemento;
     novo->prox = pi->topo;
     pi->topo = novo;
+    pi->tamanho++;
 }
 
 void *pop(PILHA p){
@@ -65,6 +68,7 @@ void *pop(PILHA p){
 
     pi->topo = pi->topo->prox;
     free(retira);
+    pi->tamanho--;
     return elementoRetirado;
 }
 
@@ -79,12 +83,14 @@ void *getTopo(PILHA p){
 }
 
 void destroiPilha(PILHA p){
-    PILHAP* pi = (PILHAP*) p;
-
     while(!pilhaVazia(p)){
         pop(p);
     }
     // Enquanto NÃO estiver vazia, percorre ela dando pop e depois libera a pilha.
+    free(p);
+}
 
-    free(pi);
+int getTamanhoPilha(PILHA p){
+    PILHAP* pi = (PILHAP*) p;
+    return pi->tamanho;
 }

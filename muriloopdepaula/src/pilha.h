@@ -39,7 +39,7 @@ void destroiPilha(PILHA p);
  * 
  * @param PILHA Ponteiro que indica em qual pilha será inserido o elemento.
  *
- * @param elemento Ponteiro genérico que ndica qual forma geometrica será inserida.
+ * @param elemento Ponteiro genérico que indica qual forma geometrica será inserida.
  *
  * @details Função criada para a inserção, dinâmica, de um elemento.
  * Essa função cria um novo nó no final da pilha e insere a forma lá.
@@ -58,7 +58,7 @@ void push(PILHA p, void *elemento);
  *
  * @return Um ponteiro para a forma do topo retirado.
  * 
- * @warning Retorna NULL caso a fila esteja vazia.
+ * @warning Retorna NULL caso a pilha esteja vazia.
  */
 void *pop(PILHA p);
 
@@ -76,10 +76,20 @@ void *getTopo(PILHA p);
 /**
  * @brief Função que verifica se a pilha está vazia. 
  * 
- * @param PILHA
+ * @param PILHA Ponteiro que indica qual pilha está sendo analisada.
  * 
  * @return 1 - para vazia 0 - para algum conteúdo dentro 
  */
 int pilhaVazia(PILHA p);
+
+/**
+ * @brief Função que mostra o número total de elementos da pilha.
+ * 
+ * @param PILHA Ponteiro para a pilha analisada.
+ *
+ * @return Um inteiro que representa o total de elementos. 
+ */
+int getTamanhoPilha(PILHA p);
+
 
 #endif
