@@ -24,6 +24,8 @@ typedef void* Retangulo;
  * @return Retorna o ponteiro para o retângulo criado.
  *
  * @details Cria um retângulo, inicializa seus atributos e retorna um ponteiro para ele.
+ *
+ * @warning Caso dê erro de alocação de memória, o programa encerra.
  */
 Retangulo criarRetangulo(int id, double x, double y, double h, double w, char *corB, char *corP);
 
@@ -96,68 +98,5 @@ char *getCorBRetangulo(Retangulo r);
  * @return Uma string com a cor de preenchimento da forma.  
 */
 char *getCorPRetangulo(Retangulo r);
-
-/**
- * @brief Função que calcula a área do retângulo.
- *
- * @param Retangulo Ponteiro para o retângulo que será calculado a área.
- *
- * @return A área do retângulo. 
- */
-double calcAreaRetangulo(Retangulo r);
-
-/**
- * @brief Função que define uma nova coordenada para 'X'.
- *
- * @param Retangulo Ponteiro do retângulo analisado.
- *
- * @param x Novo valor para a coordenada 'X'.
- */
-void setXRetangulo(Retangulo r, double xNovo);
-
-/**
- * @brief Função que define uma nova coordenada para 'Y'.
- *
- * @param Retangulo Ponteiro do retângulo analisado.
- *
- * @param x Novo valor para a coordenada 'Y'.
- */
-void setYRetangulo(Retangulo r, double yNovo);
-
-/**
- * @brief Função que define um novo valor para a altura.
- *
- * @param Retangulo Ponteiro do retângulo analisado.
- *
- * @param x Novo valor para a altura.
- */
-void setHRetangulo(Retangulo r, double hNovo);
-
-/**
- * @brief Função que define um novo valor para a largura.
- *
- * @param Retangulo Ponteiro do retângulo analisado.
- *
- * @param x Novo valor para a largura.
- */
-void setWRetangulo(Retangulo r, double wNovo);
-
-/**
- * @brief Função que define uma nova cor para a borda do retângulo.
- *
- * @param Retangulo Ponteiro do retângulo analisado.
- *
- * @param x Nova cor para a borda do retângulo.
- */
-void setCorBRetangulo(Retangulo r, char *corBNovo);
-
-/**
- * @brief Função que define uma nova cor para o preenchimento do retângulo.
- *
- * @param Retangulo Ponteiro do retângulo analisado.
- *
- * @param x Nova cor para o preenchimento do retângulo.
- */
-void setCorPRetangulo(Retangulo r, char *corPNovo);
 
 #endif

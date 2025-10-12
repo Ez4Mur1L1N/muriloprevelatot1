@@ -23,6 +23,8 @@ typedef void* Circulo;
  * @return Retorna o ponteiro para o círculo criado.
  *
  * @details Cria um círculo, inicializa seus atributos e retorna um ponteiro para ele.
+ *
+ * @warning Caso dê erro de alocação de memória, o programa encerra.
  */
 Circulo criarCirculo(int id, double x, double y, double r, char *corB, char *corP);
 
@@ -86,59 +88,5 @@ char *getCorBCirculo(Circulo c);
  * @return Uma string com a cor de preenchimento da forma.  
 */
 char *getCorPCirculo(Circulo c);
-
-/**
- * @brief Função que calcula a área do círculo.
- *
- * @param Circulo Ponteiro para o círculo que será calculado a área.
- *
- * @return A área do círculo. 
- */
-double calcAreaCirculo(Circulo c);
-
-/**
- * @brief Função que define uma nova coordenada para 'X'.
- *
- * @param Circulo Ponteiro do círculo analisado.
- *
- * @param xNovo Novo valor para a coordenada 'X'.
- */
-void setXCirculo(Circulo c, double xNovo);
-
-/**
- * @brief Função que define uma nova coordenada para 'Y'.
- *
- * @param Circulo Ponteiro do círculo analisado.
- *
- * @param yNovo Novo valor para a coordenada 'Y'.
- */
-void setYCirculo(Circulo c, double yNovo);
-
-/**
- * @brief Função que define um novo valor para o raio.
- *
- * @param Circulo Ponteiro do círculo analisado.
- *
- * @param raioNovo Novo valor para o raio.
- */
-void setRCirculo(Circulo c, double raioNovo);
-
-/**
- * @brief Função que define uma nova cor para a borda do círculo.
- *
- * @param Circulo Ponteiro do círculo analisado.
- *
- * @param corBNova Nova cor para a borda do círculo.
- */
-void setCorBCirculo(Circulo c, char *corBNova);
-
-/**
- * @brief Função que define uma nova cor para o preenchimento do círculo.
- *
- * @param Circulo Ponteiro do círculo analisado.
- *
- * @param corPNova Nova cor para o preenchimento do círculo.
- */
-void setCorPCirculo(Circulo c, char *corPNova);
 
 #endif
