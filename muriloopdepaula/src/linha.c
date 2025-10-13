@@ -9,7 +9,7 @@ typedef struct{
     double y1;
     double x2;
     double y2;
-    char cor[25];
+    char *cor;
 } LINHAL;
 
 Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor){
@@ -24,6 +24,11 @@ Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor){
     li->y1 = y1;
     li->x2 = x2;
     li->y2 = y2;
+    li->cor = (char*) malloc(sizeof(char)*(strlen(cor)+1));
+    if(li->cor == NULL){
+        printf("Erro ao alocar memoria");
+        exit(1);
+    }
     strcpy(li->cor, cor);
 
     return li;
@@ -31,6 +36,7 @@ Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor){
 
 void destroiLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    free(li->cor);
     free(li);
 }
 

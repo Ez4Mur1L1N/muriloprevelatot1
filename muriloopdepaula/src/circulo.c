@@ -8,8 +8,8 @@ typedef struct{
     double x;
     double y;
     double r;
-    char corBo[25];
-    char corPr[25];
+    char *corBo;
+    char *corPr;
 } CIRCULOC;
 
 Circulo criarCirculo(int id, double x, double y, double r, char *corB, char *corP){
@@ -23,7 +23,17 @@ Circulo criarCirculo(int id, double x, double y, double r, char *corB, char *cor
     ci->x = x;
     ci->y = y;
     ci->r = r;
+    ci->corBo = (char*)malloc(sizeof(char)*(strlen(corB)+1));
+    if(ci->corBo == NULL){
+        printf("Erro ao alocar memoria!");
+        exit(1);
+    }
     strcpy(ci->corBo, corB);
+    ci->corPr = (char*)malloc(sizeof(char)*(strlen(corP)+1));
+    if(ci->corPr == NULL){
+        printf("Erro ao alocar memoria!");
+        exit(1);
+    }
     strcpy(ci->corPr, corP);
 
     return ci;
@@ -31,6 +41,8 @@ Circulo criarCirculo(int id, double x, double y, double r, char *corB, char *cor
 
 void destroiCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    free(ci->corBo);
+    free(ci->corPr);
     free(ci);
 }
 

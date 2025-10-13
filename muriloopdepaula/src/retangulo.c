@@ -9,8 +9,8 @@ typedef struct{
     double y;
     double w;
     double h;
-    char corBo[25];
-    char corPr[25];
+    char *corBo;
+    char *corPr;
 } RETANGULOR;
 
 Retangulo criarRetangulo(int id, double x, double y, double w, double h, char *corB, char *corP){
@@ -25,7 +25,17 @@ Retangulo criarRetangulo(int id, double x, double y, double w, double h, char *c
     re->y = y;
     re->w = w;
     re->h = h;
+    re->corBo = (char*) malloc(sizeof(char)*(strlen(corB)+1));
+    if(re->corBo == NULL){
+        printf("Erro ao alocar memoria!");
+        exit(1);
+    }
     strcpy(re->corBo, corB);
+    re->corPr = (char*) malloc(sizeof(char)*(strlen(corP)+1));
+    if(re->corBo == NULL){
+        printf("Erro ao alocar memoria!");
+        exit(1);
+    }
     strcpy(re->corPr, corP);
 
     return re;
@@ -33,6 +43,8 @@ Retangulo criarRetangulo(int id, double x, double y, double w, double h, char *c
 
 void destroiRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    free(re->corBo);
+    free(re->corPr);
     free(re);
 }
 

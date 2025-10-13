@@ -26,6 +26,8 @@ typedef void* Texto;
  * @param fSize Indica o tamanho da fonte do texto.
  *
  * @return Retorna um ponteiro para o texto criado.
+ *
+ * @warning Caso dê erro de alocação de memória, o programa encerra.
  */
 Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, char *texto, char *fFamily, char *fWeight, char *fSize);
 
@@ -125,52 +127,5 @@ char *getFonteWeightTexto(Texto t);
  * @return Uma string que representa o tamanho da fonte do texto.
  */
 char *getFonteSizeTexto(Texto t);
-
-/**
- * @brief Função que calcula a área do texto 
- * 
- * @param Texto Ponteiro do texto analisado.
- * 
- * @return Um double que representa a área do texto. 
- *
- * @details (20 * número de caracteres)
- */
-double calcAreaTexto(Texto t);
-
-/**
- * @brief Função que define uma nova coordenada âncora 'X' do texto.
- * 
- * @param Texto Ponteiro do texto analisado.
- *
- * @param xNovo Novo valor para a coordenada âncora 'X' do texto.
- */
-void setXTexto(Texto t, double xNovo);
-
-/**
- * @brief Função que define uma nova coordenada âncora 'Y' do texto.
- * 
- * @param Texto Ponteiro do texto analisado.
- *
- * @param yNovo Novo valor para a coordenada âncora 'Y' do texto.
- */
-void setYTexto(Texto t, double yNovo);
-
-/**
- * @brief Função que define uma nova cor de borda do texto.
- * 
- * @param Texto Ponteiro do texto analisado.
- *
- * @param corBNova Nova cor de borda do texto.
- */
-void setCorBTexto(Texto t, char *corBNova);
-
-/**
- * @brief Função que define uma nova cor de preenchimento do texto.
- * 
- * @param Texto Ponteiro do texto analisado.
- *
- * @param corPNova Nova cor de preenchimento do texto.
- */
-void setCorPTexto(Texto t, char *corPNova);
 
 #endif
