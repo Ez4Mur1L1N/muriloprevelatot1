@@ -70,11 +70,22 @@ void desenhaTextoSVG(FILE* arqSVG, Texto t);
 /**
  * @brief Desenha um asterisco vermelho no local da forma esmagada.
  *
- * @param arqSvg Ponteiro para o arquivo SVG aberto.
+ * @param arqSVG Ponteiro para o arquivo SVG aberto.
  * @param x A coordenada X do centro do asterisco.
  * @param y A coordenada Y do centro do asterisco.
  */
 void svgDesenhaAsterisco(FILE* arqSvg, double x, double y);
 
+/**
+ * @brief Desenha um retângulo tracejado que auxiliará na visualização de formas sobrepostas.
+ * 
+ * @param arqSVG Ponteiro para o arquivo SVG aberto.
+ * @param x Indica a coordenada X (plano cartesiano) do canto inferior esquerdo do retângulo. 
+ * @param y Indica a coordenada Y (plano cartesiano) do canto inferior esquerdo do retângulo. 
+ * @param w Indica a largura do retângulo.
+ * @param h Indica a altura do retângulo.
+ * @param cor Indica a cor do contorno.
+ */
+void svgDesenhaBordaTracejada(FILE* arqSVG, double x, double y, double w, double h, char *cor);
 
 #endif
