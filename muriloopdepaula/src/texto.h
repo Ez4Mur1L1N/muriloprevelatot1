@@ -128,4 +128,43 @@ char *getFonteWeightTexto(Texto t);
  */
 char *getFonteSizeTexto(Texto t);
 
+/**
+ * @brief Função que define uma nova coordenada âncora 'X' do texto.
+ *  * @param t Ponteiro do texto analisado.
+ *
+ * @param xNovo Novo valor para a coordenada âncora 'X' do texto.
+ */
+void setXTexto(Texto t, double xNovo);
+
+/**
+ * @brief Função que define uma nova coordenada âncora 'Y' do texto.
+ *  * @param t Ponteiro do texto analisado.
+ *
+ * @param yNovo Novo valor para a coordenada âncora 'Y' do texto.
+ */
+void setYTexto(Texto t, double yNovo);
+
+/**
+ * @brief Função que define uma nova cor de borda do texto.
+ * @param t Ponteiro do texto analisado.
+ * @param corBNova Nova cor de borda do texto.
+ */
+void setCorBTexto(Texto t, char *corBNova);
+
+/**
+ * @brief Função que define uma nova cor de preenchimento do texto.
+ * @param t Ponteiro do texto analisado.
+ * @param corPNova Nova cor de preenchimento do texto.
+ */
+void setCorPTexto(Texto t, char *corPNova);
+
+/**
+ * @brief Função que calcula a área do texto 
+ *  * @param t Ponteiro do texto analisado.
+ *  * @return Um double que representa a área do texto. 
+ *
+ * @details A "área" de um texto é o número de caracteres que ele contém.
+ */
+double calcAreaTexto(Texto t);
+
 #endif

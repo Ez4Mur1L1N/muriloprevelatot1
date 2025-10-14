@@ -32,7 +32,7 @@ Retangulo criarRetangulo(int id, double x, double y, double w, double h, char *c
     }
     strcpy(re->corBo, corB);
     re->corPr = (char*) malloc(sizeof(char)*(strlen(corP)+1));
-    if(re->corBo == NULL){
+    if(re->corPr == NULL){
         printf("Erro ao alocar memoria!");
         exit(1);
     }
@@ -81,4 +81,57 @@ char *getCorBRetangulo(Retangulo r){
 char *getCorPRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
     return re->corPr;
+}
+
+void setXRetangulo(Retangulo r, double xNovo){
+    RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return;
+    }
+    re->x = xNovo;
+}
+
+void setYRetangulo(Retangulo r, double yNovo){
+    RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return;
+    }
+    re->y = yNovo;
+}
+
+void setCorBRetangulo(Retangulo r, char *corBNova){
+    RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return;
+    }
+    free(re->corBo);
+    re->corBo = (char*)malloc(sizeof(char)*(strlen(corBNova)+1));
+    if (re->corBo == NULL) {
+        printf("Erro ao alocar memoria para nova cor!");
+        exit(1);
+    }
+    strcpy(re->corBo, corBNova);
+}
+
+void setCorPRetangulo(Retangulo r, char *corPNova){
+    RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return;
+    }
+    free(re->corPr);
+    re->corPr = (char*)malloc(sizeof(char)*(strlen(corPNova)+1));
+    if (re->corPr == NULL) {
+        printf("Erro ao alocar memoria para nova cor!");
+        exit(1);
+    }
+    strcpy(re->corPr, corPNova);
+}
+
+double calcAreaRetangulo(Retangulo r){
+    RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return 0.0;
+    }
+    // Fórmula da área do retângulo: largura * altura
+    return re->w * re->h;
 }

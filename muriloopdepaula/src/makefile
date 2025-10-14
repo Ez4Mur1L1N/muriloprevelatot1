@@ -1,16 +1,7 @@
-# Nome do projeto (o executável final)
 PROJ_NAME=ted
-
-# Seu nome para identificação
 ALUNO=Murilo de Paula
-
-# Bibliotecas externas que você possa precisar (ex: -lm para a de matemática)
 LIBS=-lm
-
-# Lista de TODOS os arquivos objeto (.o) que serão gerados
 OBJETOS=Pilha.o Fila.o Forma.o Carregador.o Disparador.o Arena.o LeitorGeo.o LeitorQry.o Svg.o main.o
-
-# --- NÃO PRECISA MUDAR DAQUI PARA BAIXO (A NÃO SER AS DEPENDÊNCIAS) ---
 
 # Compilador a ser usado
 CC=gcc
@@ -37,10 +28,9 @@ clean:
 
 #
 ###
-# DEPENDÊNCIAS DE CADA MÓDULO (A PARTE MAIS IMPORTANTE!)
+# DEPENDÊNCIAS DE CADA MÓDULO 
 ###
-# Aqui você diz: "para criar X.o, você precisa olhar para Y.h e Z.h"
-# Se Y.h ou Z.h mudarem, o make saberá que precisa recompilar X.c
+#
 
 main.o: main.c LeitorGeo.h LeitorQry.h
 Pilha.o: Pilha.c Pilha.h

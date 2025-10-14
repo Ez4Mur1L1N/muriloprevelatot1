@@ -85,7 +85,61 @@ double getY2Linha(Linha l);
  * @param Linha Ponteiro da linha analisada.
  * 
  * @return Uma string com a cor da linha.  
-*/
+ */
 char *getCorLinha(Linha l);
+
+/**
+ * @brief Função que define uma nova coordenada para 'X1'.
+ *
+ * @param Linha Ponteiro da linha analisada.
+ *
+ * @param x1Novo Novo valor para a coordenada 'X1'.
+ */
+void setX1Linha(Linha l, double x1Novo);
+
+/**
+ * @brief Função que define uma nova coordenada para 'Y1'.
+ *
+ * @param Linha Ponteiro da linha analisada.
+ *
+ * @param y1Novo Novo valor para a coordenada 'Y1'.
+ */
+void setY1Linha(Linha l, double y1Novo);
+
+/**
+ * @brief Função que define uma nova coordenada para 'X2'.
+ *
+ * @param Linha Ponteiro da linha analisada.
+ *
+ * @param x2Novo Novo valor para a coordenada 'X2'.
+ */
+void setX2Linha(Linha l, double x2Novo);
+
+/**
+ * @brief Função que define uma nova coordenada para 'Y2'.
+ *
+ * @param Linha Ponteiro da linha analisada.
+ *
+ * @param y2Novo Novo valor para a coordenada 'Y2'.
+ */
+void setY2Linha(Linha l, double y2Novo);
+
+/**
+ * @brief Função que define uma nova cor para a linha.
+ *
+ * @param Linha Ponteiro da linha analisada.
+ *
+ * @param corNova Nova cor para a linha.
+ */
+void setCorLinha(Linha l, char *corNova);
+
+/**
+ * @brief Função que calcula a área da linha. 
+ * 
+ * @param Linha Ponteiro da linha analisada.
+ * 
+ * @return Um double que representa a área da linha (comprimento).
+ */
+double calcAreaLinha(Linha l);
 
 #endif

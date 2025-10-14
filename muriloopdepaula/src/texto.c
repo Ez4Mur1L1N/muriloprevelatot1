@@ -131,3 +131,48 @@ char *getFonteSizeTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
     return te->estilo.fSize;
 }
+
+void setXTexto(Texto t, double xNovo) {
+    TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) return;
+    te->x = xNovo;
+}
+
+void setYTexto(Texto t, double yNovo) {
+    TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) return;
+    te->y = yNovo;
+}
+
+void setCorBTexto(Texto t, char *corBNova) { 
+    TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) return;
+    free(te->corBo);
+    te->corBo = (char*)malloc(sizeof(char)*(strlen(corBNova)+1));
+    if (te->corBo == NULL) {
+        printf("Erro ao alocar memoria para nova cor!");
+        exit(1);
+    }
+    strcpy(te->corBo, corBNova);
+}
+
+void setCorPTexto(Texto t, char *corPNova) { 
+    TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) return;
+    free(te->corPr);
+    te->corPr = (char*)malloc(sizeof(char)*(strlen(corPNova)+1));
+    if (te->corPr == NULL) {
+        printf("Erro ao alocar memoria para nova cor!");
+        exit(1);
+    }
+    strcpy(te->corPr, corPNova);
+}
+
+double calcAreaTexto(Texto t) {
+    TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL || te->txt == NULL) {
+        return 0.0;
+    }
+    // Convenção do projeto: Área = 20.0 * número de caracteres
+    return 20.0 * strlen(te->txt);
+}

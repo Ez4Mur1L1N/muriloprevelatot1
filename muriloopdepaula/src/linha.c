@@ -69,3 +69,63 @@ char *getCorLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
     return li->cor;
 }
+
+void setX1Linha(Linha l, double x1Novo){
+    LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return;
+    }    
+    li->x1 = x1Novo;
+}
+
+void setY1Linha(Linha l, double y1Novo){
+    LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return;
+    }    
+    li->y1 = y1Novo;
+}
+
+void setX2Linha(Linha l, double x2Novo){
+    LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return;
+    }
+    li->x2 = x2Novo;
+}
+
+void setY2Linha(Linha l, double y2Novo){
+    LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return;
+    }
+    li->y2 = y2Novo;
+}
+
+void setCorLinha(Linha l, char *corNova){
+    LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return;
+    }
+    free(li->cor);
+    li->cor = (char*)malloc(sizeof(char)*(strlen(corNova)+1));
+    if (li->cor == NULL) {
+        printf("Erro ao alocar memoria para nova cor!");
+        exit(1);
+    }
+    strcpy(li->cor, corNova);
+}
+
+double calcAreaLinha(Linha l){
+    LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return 0.0;
+    }
+    // Fórmula da distância entre dois pontos para o comprimento
+    double dx = li->x2 - li->x1;
+    double dy = li->y2 - li->y1;
+    double comprimento = sqrt(dx*dx + dy*dy); 
+
+    // Convenção do projeto: Área = 2.0 * comprimento
+    return 2.0 * comprimento;
+}

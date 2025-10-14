@@ -87,7 +87,7 @@ double getWRetangulo(Retangulo r);
  * @param Retangulo Ponteiro do retângulo analisado.
  * 
  * @return Uma string com a cor da borda da forma.  
-*/
+ */
 char *getCorBRetangulo(Retangulo r);
 
 /**
@@ -96,7 +96,52 @@ char *getCorBRetangulo(Retangulo r);
  * @param Retangulo Ponteiro do retângulo analisado.
  * 
  * @return Uma string com a cor de preenchimento da forma.  
-*/
+ */
 char *getCorPRetangulo(Retangulo r);
+
+/**
+ * @brief Função que define uma nova coordenada para 'X'.
+ *
+ * @param Retangulo Ponteiro do retângulo analisado.
+ *
+ * @param xNovo Novo valor para a coordenada 'X'.
+ */
+void setXRetangulo(Retangulo r, double xNovo);
+
+/**
+ * @brief Função que define uma nova coordenada para 'Y'.
+ *
+ * @param Retangulo Ponteiro do retângulo analisado.
+ *
+ * @param yNovo Novo valor para a coordenada 'Y'.
+ */
+void setYRetangulo(Retangulo r, double yNovo);
+
+/**
+ * @brief Função que define uma nova cor para a borda do retângulo.
+ *
+ * @param Retangulo Ponteiro do retângulo analisado.
+ *
+ * @param corBNova Nova cor para a borda do retângulo.
+ */
+void setCorBRetangulo(Retangulo r, char *corBNova);
+
+/**
+ * @brief Função que define uma nova cor para o preenchimento do retângulo.
+ *
+ * @param Retangulo Ponteiro do retângulo analisado.
+ *
+ * @param corPNova Nova cor para o preenchimento do retângulo.
+ */
+void setCorPRetangulo(Retangulo r, char *corPNova);
+
+/**
+ * @brief Função que calcula a área do retângulo.
+ *
+ * @param Retangulo Ponteiro para o retângulo que será calculado a área.
+ *
+ * @return A área do retângulo. 
+ */
+double calcAreaRetangulo(Retangulo r);
 
 #endif
