@@ -15,15 +15,15 @@ typedef void* Carregador;
  * @brief Cria um carregador vazio.
  * 
  * @return Ponteiro para o novo carregador. 
+ *
+ * @warning Caso dê erro de alocação de memória, o programa encerra.
  */
 Carregador criarCarregador();
 
 /**
- * @brief Libera a memória associada ao carregador e aos elementos contidos nele.
+ * @brief Libera a memória associada ao carregador.
  * 
  * @param Carregador Ponteiro para o carregador analisado.
- *
- * @details Ainda preciso entender como fazer para o programa entender cada forma e cada nó e assim eliminar corretamente.
  */
 void destroiCarregador(Carregador c);
 
@@ -33,14 +33,14 @@ void destroiCarregador(Carregador c);
  * @param Carregador Ponteiro para o carregador analisado.
  * @param Forma Ponteiro genérico para a forma que será colocada.
  */
-void pushForma(Carregador c, void *Forma);
+void carregaForma(Carregador c, void *Forma);
 
 /**
  * @brief Função que desempilha uma forma geométrica no topo do carregador.
  * 
  * @param Carregador Ponteiro para o carregador analisado.
  */
-void* popForma(Carregador c);
+void* descarregaForma(Carregador c);
 
 /**
  * @brief Função para 'pegar' (sem tirar do carregador) do topo.
@@ -49,7 +49,7 @@ void* popForma(Carregador c);
  * 
  * @return Ponteiro para a forma que está no topo.
  */
-void *getForma(Carregador c);
+void *getTopoCarregador(Carregador c);
 
 /**
  * @brief Função que vai mostrar se o carregador está vazio ou não.

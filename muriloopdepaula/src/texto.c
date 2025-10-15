@@ -134,19 +134,25 @@ char *getFonteSizeTexto(Texto t){
 
 void setXTexto(Texto t, double xNovo) {
     TEXTOT* te = (TEXTOT*) t;
-    if (te == NULL) return;
+    if (te == NULL) {
+        return;
+    }
     te->x = xNovo;
 }
 
 void setYTexto(Texto t, double yNovo) {
     TEXTOT* te = (TEXTOT*) t;
-    if (te == NULL) return;
+    if (te == NULL) {
+        return;
+    }
     te->y = yNovo;
 }
 
 void setCorBTexto(Texto t, char *corBNova) { 
     TEXTOT* te = (TEXTOT*) t;
-    if (te == NULL) return;
+    if (te == NULL) {
+        return;
+    }
     free(te->corBo);
     te->corBo = (char*)malloc(sizeof(char)*(strlen(corBNova)+1));
     if (te->corBo == NULL) {
@@ -158,7 +164,9 @@ void setCorBTexto(Texto t, char *corBNova) {
 
 void setCorPTexto(Texto t, char *corPNova) { 
     TEXTOT* te = (TEXTOT*) t;
-    if (te == NULL) return;
+    if (te == NULL) {
+        return;
+    }
     free(te->corPr);
     te->corPr = (char*)malloc(sizeof(char)*(strlen(corPNova)+1));
     if (te->corPr == NULL) {
