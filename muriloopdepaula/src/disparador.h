@@ -19,6 +19,8 @@ typedef void* Disparador;
  * @param y Coordenada 'Y' da posição do disparador.
  *
  * @return Um ponteiro para o disparador.
+ *
+ * @warning Caso dê erro na alocação de memória, encerra o programa.
  */
 Disparador criarDisparador(int id, double x, double y);
 
@@ -26,8 +28,68 @@ Disparador criarDisparador(int id, double x, double y);
  * @brief Função que libera memória associada ao disparador e aos seus elementos.
  * 
  * @param Disparador Ponteiro do disparador analisado.
+ *
+ * @details Dessacocia os dois carregadores, mas NÃO a forma que está no posição de disparo.
  */
 void destroiDisparador(Disparador d);
+
+/**
+ * @brief Função que encaixa carregadores externos no disparador.
+ *
+ * @param Disparador Ponteiro do disparador analisado.
+ * @param esq O Carregador a ser encaixado na esquerda.
+ * @param dir O Carregador a ser encaixado na direita.
+ *
+ * @details Os carregadores internos originais do disparador são destruídos.
+ */
+void anexaCarregadoresDisparador(Disparador d, Carregador esq, Carregador dir);
+
+/**
+ * @brief Função que vai carregar algum dos disparadores com formas no chão.
+ * 
+ * @param Disparador Ponteiro do disparador analisado.
+ * @param elemento Ponteiro genérico para forma a ser carregada.
+ * @param lado Char(e ou d) que indica o lado do disparador. 
+ */
+void carregaFormaDisparador(Disparador d, void *elemento, char lado);
+
+/**
+ * @brief Função que pega o elemento do topo do carregador direito e municia o disparador.
+ * 
+ * @param Disparador Ponteiro do disparador analisado. 
+ *
+ * @details Se já houver alguma forma na posição de disparo essa forma vai para o topo do carregador esquerdo.
+ */
+void selecionaDireitaDisparador(Disparador d);
+
+/**
+ * @brief Função que pega o elemento do topo do carregador esquerdo e municia o disparador.
+ * 
+ * @param Disparador Ponteiro do disparador analisado. 
+ *
+ * @details Se já houver alguma forma na posição de disparo essa forma vai para o topo do carregador direito.
+ */
+void selecionaEsquerdaDisparador(Disparador d);
+
+/**
+ * @brief Função que vai executar o comando "shft" do .qry, movendo n formas na direção que o arquivo indicar.
+ * 
+ * @param Disparador Ponteiro do disparador analisado.
+ * @param lado A direção para onde as formas serão movidas (e - esquerda d - direita).
+ * @param n Quantas formas serão movidas.
+ */
+void shiftDisparador(Disparador d, char lado, int n);
+
+/**
+ * @brief Função que realiza - simula - o disparo.
+ * 
+ * @param Disparador Ponteiro do disparador analisado.
+ *
+ * @return Ponteiro da forma disparada a fim de posicionar o elemento na arena. Ele remove essa forma da posição de disparo.
+ *
+ * @warning Retorna NULL se não havia nada na posição de disparo.
+ */
+void *disparar(Disparador d);
 
 /**
  * @brief Função que 'pega' o ID do disparador.
@@ -84,35 +146,5 @@ Carregador getCarrDireitaDisparador(Disparador d);
  * @details Caso não tenha nada, retorna NULL.
  */
 void *getFormaArmadaDisparador(Disparador d);
-
-/**
- * @brief Função que muda a posição do disparador.
- * 
- * @param Disparador Ponteiro do disparador analisado.
- * @param xNovo Novo valor para coordenada 'X'.
- * @param yNovo Novo valor para coordenada 'Y'.
- */
-void moveDisparador(Disparador d, double xNovo, double yNovo);
-
-/**
- * @brief Função que pega o elemento do topo do carregador e municia o disparador.
- * 
- * @param Disparador Ponteiro do disparador analisado.
- * @param carregador Char para indicar qual carregador (esquerda ou direita - e ou d).
- *
- * @return Ponteiro para a forma selecionada na posição de disparo.
- *
- * @details Caso já exista uma forma na posição de disparo nada ocorre.
- */
-void *armarDisparador(Disparador d, char carregador);
-
-/**
- * @brief Função que realiza o disparo
- * 
- * @param Disparador Ponteiro do disparador analisado.
- *
- * @return Ponteiro da forma disparada a fim de posicionar o elemento na arena
- */
-void *disparar(Disparador d);
 
 #endif
