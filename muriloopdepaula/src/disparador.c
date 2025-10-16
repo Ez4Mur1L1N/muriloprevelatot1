@@ -6,12 +6,14 @@ typedef struct{
     int id;
     double x;
     double y;
+    double dx;
+    double dy;
     Carregador caEsquerdo;
     Carregador caDireito;
     void* formaDisparo; //Elemento na posição de disparo.
 } DISPARADORD;
 
-Disparador criarDisparador(int id, double x, double y){
+Disparador criarDisparador(int id, double x, double y, double dx, double dy){
     DISPARADORD* di = (DISPARADORD*) malloc(sizeof(DISPARADORD));
     if(di == NULL){
         printf("Erro ao alocar memoria! Programa encerrado");
@@ -21,6 +23,8 @@ Disparador criarDisparador(int id, double x, double y){
     di->id = id;
     di->x = x;
     di->y = y;
+    di->dx = dx;
+    di->dy = dy;
     di->caEsquerdo = criarCarregador();
     di->caDireito = criarCarregador();
     // Inicialmente a posição de disparo está vazia.

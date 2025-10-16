@@ -17,12 +17,14 @@ typedef void* Disparador;
  * @param id Identificador do disparador.
  * @param x Coordenada 'X' da posição do disparador.
  * @param y Coordenada 'Y' da posição do disparador.
+ * @param dx Coordenada 'X' da direção do disparador.
+ * @param dy Coordenada 'Y' da direção do disparador.
  *
  * @return Um ponteiro para o disparador.
  *
  * @warning Caso dê erro na alocação de memória, encerra o programa.
  */
-Disparador criarDisparador(int id, double x, double y);
+Disparador criarDisparador(int id, double x, double y, double dx, double dy);
 
 /**
  * @brief Função que libera memória associada ao disparador e aos seus elementos.

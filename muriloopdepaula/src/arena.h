@@ -13,14 +13,18 @@ typedef void* Arena;
 /**
  * @brief Função que cria uma arena.
  * 
- * @return Ponteiro para a arena criada vazia; 
+ * @return Ponteiro para a arena criada vazia.
+ *
+ * @warning Caso dê erro na alocação de memória, encerra o programa. 
  */
 Arena criarArena();
 
 /**
- * @brief Função que libera memória da arena e de seus respectivos elementos.
+ * @brief Função que libera memória da arena.
  * 
  * @param Arena Ponteira para a arena analisada.
+ *
+ * @details Libera a memórias da fila interna, mas não das formas contidas nela.
  */
 void destroiArena(Arena a);
 
@@ -37,7 +41,9 @@ void inserirFormaArena(Arena a, void* Forma);
  * 
  * @param Arena Ponteiro para a arena analisada.
  * 
- * @return Ponteiro para a forma retirada.
+ * @return Ponteiro para a forma retirada. **MAIS ANTIGA (FIFO).
+ *
+ * @warning Retorna NULL se a arena estiver vazia.
  */
 void *removeFormaArena(Arena a);
 
@@ -53,12 +59,12 @@ void *removeFormaArena(Arena a);
 int arenaVazia(Arena a);
 
 /**
- * @brief Função que indica o número de elementos na arena.
+ * @brief Função que retorna a fila de formas da arena.
  * 
  * @param Arena Ponteiro para a arena analisada. 
  *
- * @return Quantos elementos têm na arena. 
+ * @return Um ponteiro para a fila que contém as formas. 
  */
-int numElemArena(Arena a);
+Fila getFilaArena(Arena a);
 
 #endif
