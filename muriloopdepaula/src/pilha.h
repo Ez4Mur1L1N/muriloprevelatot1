@@ -18,9 +18,9 @@ typedef void* PILHA;
  * @return Retorna um ponteiro para pilha criada.
  *
  * @details Aloca dinamicamente memória para a pilha, atribuindo ponteiro 
- * para o topo da pilha .
+ * para o topo da pilha.
  *
- * @warning Caso a alocacao de memoria dê errado, encerra o programa.
+ * @warning     
  */
 PILHA criarPilha();
 
