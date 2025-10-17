@@ -5,6 +5,8 @@
 #include "circulo.h"
 #include "tipos.h"
 
+#define PI 3.14159
+
 typedef struct{
     int id;
     TipoForma tipo;
@@ -161,5 +163,5 @@ double calcAreaCirculo(Circulo c){
         return 0.0;
     }   
     // Fórmula da área do círculo: pi * r²
-    return M_PI * ci->r * ci->r;
+    return PI * ci->r * ci->r;
 }

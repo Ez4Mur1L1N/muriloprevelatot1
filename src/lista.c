@@ -80,7 +80,7 @@ No insereFinalLista(Lista l, Conteudo c){
     return novo;
 }
 
-Conteudo removeNoLista(lista l, No n){
+Conteudo removeNoLista(Lista l, No n){
     LISTAL* li = (LISTAL*) l;
     NO noLista = (NO) n;
     if(li == NULL || noLista == NULL){

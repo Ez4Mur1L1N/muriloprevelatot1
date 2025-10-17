@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "carregador.h"
+#include "pilha.h"
 
 typedef struct{
-    Pilha formasGeo;
+    PILHA formasGeo;
 } CARREGADORC;
 
 Carregador criarCarregador(){

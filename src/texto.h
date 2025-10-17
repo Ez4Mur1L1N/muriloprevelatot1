@@ -1,6 +1,8 @@
 #ifndef TEXTO_H
 #define TEXTO_H
 
+#include "tipos.h"
+
 /*
 TAD que vai representar um texto. Deve-se ressaltar que a representação desse texto
 se dará dentro de um plano bidimensional.

@@ -3,7 +3,7 @@
 #include "arena.h"
 
 typedef struct{
-    Fila formasInseridas;
+    FILA formasInseridas;
 }ARENAA;
 
 Arena criarArena(){
@@ -46,13 +46,13 @@ void *removeFormaArena(Arena a){
 int arenaVazia(Arena a){
     ARENAA* ar = (ARENAA*) a;
     if(ar == NULL){
-        return 1; //Considereramos vazia, caso não exista.
+        return 1; //Consideraremos vazia, caso não exista.
     }
 
     return filaVazia(ar->formasInseridas);
 }
 
-Fila getFilaArena(Arena a){
+FILA getFilaArena(Arena a){
     ARENAA* ar = (ARENAA*) a;
     if(ar == NULL){
         return NULL;

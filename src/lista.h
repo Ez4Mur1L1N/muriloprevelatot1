@@ -49,7 +49,7 @@ No insereFinalLista(Lista l, Conteudo c);
  *
  * @return Ponteiro para o conteúdo do nó removido.
  */
-Conteudo removeNoLista(lista l, No n);
+Conteudo removeNoLista(Lista l, No n);
 
 /**
  * @brief Função que retorna o primeiro nó da lista.

@@ -1,48 +1,37 @@
-# Nome do projeto/executável. O ../ faz com que o executável seja criado na pasta raiz, fora de src.
-PROJ_NAME=../ted
+# Nome do executável. O ../ faz ele ser criado na pasta raiz do projeto.
+TARGET = ../ted
 
-# Identificação do aluno
-ALUNO=Murilo de Paula
+# Compilador
+CC = gcc
 
-# Bibliotecas externas (lm para a biblioteca de matemática)
-LIBS=-lm
+# Flags de compilação
+# Adicionei -Werror para seguir o padrão que estávamos usando
+CFLAGS = -std=c99 -Wall -Wextra -g
 
-# Lista de todos os arquivos objeto (.o) necessários para esta etapa.
-OBJETOS=circulo.o retangulo.o linha.o texto.o lista.o svg.o leitorGeo.o main.o
+# Diretórios
+# SRC_DIR = . significa "os arquivos .c estão aqui, nesta pasta"
+SRC_DIR = .
+# BUILD_DIR = ../build significa "crie a pasta de objetos .o na pasta raiz"
+BUILD_DIR = ../build
 
-# Compilador a ser usado
-CC=gcc
+# Encontra todos os arquivos .c e cria a lista de .o correspondente
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 
-# Flags de compilação.
-CFLAGS=-g -O0 -std=c99 -Wall -Wextra -pedantic -Werror
+# Regra padrão
+all: $(TARGET)
 
-# Regra principal: para criar o executável, primeiro crie todos os OBJETOS
-$(PROJ_NAME): $(OBJETOS)
-	$(CC) -o $(PROJ_NAME) $(OBJETOS) $(LIBS)
-
-# Regra genérica para transformar qualquer .c em um .o
-%.o: %.c
+# Regra para criar os arquivos de objeto na pasta build
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Comando para limpar os arquivos gerados (o executável na pasta raiz e os objetos em src)
+# Regra para criar o executável na pasta raiz
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) -lm
+
+# Limpa a pasta build e o executável
 clean:
-	rm -f $(PROJ_NAME) $(OBJETOS)
+	rm -rf $(BUILD_DIR) $(TARGET)
 
-#
-###
-# DEPENDÊNCIAS DE CADA MÓDULO
-###
-#
-
-main.o: main.c leitorGeo.h svg.h lista.h tipos.h circulo.h retangulo.h linha.h texto.h
-
-lista.o: lista.c lista.h
-
-circulo.o: circulo.c circulo.h tipos.h
-retangulo.o: retangulo.c retangulo.h tipos.h
-linha.o: linha.c linha.h tipos.h
-texto.o: texto.c texto.h tipos.h
-
-leitorGeo.o: leitorGeo.c leitorGeo.h lista.h circulo.h retangulo.h linha.h texto.h
-
-svg.o: svg.c svg.h circulo.h retangulo.h linha.h texto.h
+.PHONY: all clean

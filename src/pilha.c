@@ -19,7 +19,7 @@ Estrutura da pilha definida: possui nós, que contém um elemento e um ponteiro 
 próximo nó. Além disso, é definida pelo topo.
 */
 
-PILHA criaPilha(){
+PILHA criarPilha(){
     PILHAP *pi = (PILHAP*) malloc(sizeof(PILHAP));
 
     if(pi == NULL){

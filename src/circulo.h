@@ -1,6 +1,7 @@
 #ifndef CIRCULO_H
 #define CIRCULO_H
 
+#include "tipos.h"
 /*
 TAD que vai representar a forma geométrica do círculo.
 A coordenada âncora dessa forma é seu centro (x,y) e sua

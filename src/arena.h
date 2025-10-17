@@ -65,6 +65,6 @@ int arenaVazia(Arena a);
  *
  * @return Um ponteiro para a fila que contém as formas. 
  */
-Fila getFilaArena(Arena a);
+FILA getFilaArena(Arena a);
 
 #endif

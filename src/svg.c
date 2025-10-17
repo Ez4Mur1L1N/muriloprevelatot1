@@ -79,17 +79,17 @@ void desenhaTextoSVG(FILE* arqSVG, Texto t){
             getTexto_Texto(t));
 }
 
-void svgDesenhaAsterisco(FILE* arqSvg, double x, double y){
-        if (arqSvg == NULL){
+void svgDesenhaAsterisco(FILE* arqSVG, double x, double y){
+        if (arqSVG == NULL){
             return;
         }
-    fprintf(arqSvg, "\t<text x=\"%f\" y=\"%f\" fill=\"red\" font-size=\"20px\" text-anchor=\"middle\" dy=\".3em\">*</text>\n", x, y);
+    fprintf(arqSVG, "\t<text x=\"%f\" y=\"%f\" fill=\"red\" font-size=\"20px\" text-anchor=\"middle\" dy=\".3em\">*</text>\n", x, y);
 }
 
 void svgDesenhaBordaTracejada(FILE* arqSVG, double x, double y, double w, double h, char* cor) {
     if (arqSVG == NULL) {
         return;
     }    
-    fprintf(arqSvg, "\t<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" style=\"fill:none; stroke:%s; stroke-width:2; stroke-dasharray:5,5;\" />\n",
+    fprintf(arqSVG, "\t<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" style=\"fill:none; stroke:%s; stroke-width:2; stroke-dasharray:5,5;\" />\n",
             x, y, w, h, cor);
 }

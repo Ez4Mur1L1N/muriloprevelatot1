@@ -1,6 +1,8 @@
 #ifndef RETANGULO_H
 #define RETANGULO_H
 
+#include "tipos.h"
+
 /*
 TAD que vai representar a forma geométrica do retângulo.
 A coordenada âncora dessa forma é seu canto inferior esquerdo (x,y) e suas

@@ -1,6 +1,8 @@
 #ifndef LINHA_H
 #define LINHA_H
 
+#include "tipos.h"
+
 /*
 TAD que vai representar uma linha. Como proposto,
 cada linha é definida por duas âncoras em suas extremidades.
