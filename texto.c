@@ -18,7 +18,7 @@ typedef struct{
     char *corBo;
     char *corPr;
     char a; //âncora
-    char *txt;
+    char *texto;
     EstiloTexto estilo;
 } TEXTOT;
 
@@ -77,7 +77,7 @@ Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, cha
 void destroiTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
     if(te == NULL){
-        return NULL
+        return;
     }
     free(te->corBo);
     free(te->corPr);
@@ -90,56 +90,89 @@ void destroiTexto(Texto t){
 
 int getIDTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return -1;
+    }
     return te->id;
 }
 
 TipoForma getTipoTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
-    return te->tipo; 
+    if (te == NULL) {
+        return -1;
+    }
+    return te->tipo;
 }
 
 double getXTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return 0.0;
+    }
     return te->x;
 }
 
 double getYTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return 0.0;
+    }
     return te->y;
 }
 
 char *getCorBTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return "";
+    }
     return te->corBo;
 }
 
 char *getCorPTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return "";
+    }
     return te->corPr;
 }
 
 char getAncoraTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return ' ';
+    }
     return te->a;
 }
 
 char *getTexto_Texto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return "";
+    }
     return te->texto;
 }
 
 char *getFonteFamilyTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return "";
+    }
     return te->estilo.fFamily;
 }
 
 char *getFonteWeightTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return "";
+    }
     return te->estilo.fWeight;
 }
 
 char *getFonteSizeTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if (te == NULL) {
+        return "";
+    }
     return te->estilo.fSize;
 }
 
@@ -159,7 +192,7 @@ void setYTexto(Texto t, double yNovo) {
     te->y = yNovo;
 }
 
-void setCorBTexto(Texto t, char *corBNova) { 
+void setCorBTexto(Texto t, char *corBNova) {
     TEXTOT* te = (TEXTOT*) t;
     if (te == NULL) {
         return;
@@ -173,7 +206,7 @@ void setCorBTexto(Texto t, char *corBNova) {
     strcpy(te->corBo, corBNova);
 }
 
-void setCorPTexto(Texto t, char *corPNova) { 
+void setCorPTexto(Texto t, char *corPNova) {
     TEXTOT* te = (TEXTOT*) t;
     if (te == NULL) {
         return;
@@ -189,9 +222,9 @@ void setCorPTexto(Texto t, char *corPNova) {
 
 double calcAreaTexto(Texto t) {
     TEXTOT* te = (TEXTOT*) t;
-    if (te == NULL || te->txt == NULL) {
+    if (te == NULL || te->texto == NULL) {
         return 0.0;
     }
     // Convenção do projeto: Área = 20.0 * número de caracteres
-    return 20.0 * strlen(te->txt);
+    return 20.0 * strlen(te->texto);
 }

@@ -55,36 +55,57 @@ void destroiCirculo(Circulo c){
 
 int getIDCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return -1;
+    }
     return ci->id;
 }
 
 TipoForma getTipoCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return -1;
+    }
     return ci->tipo;
 }
 
 double getXCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return 0.0;
+    }
     return ci->x;
 }
 
 double getYCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return 0.0;
+    }
     return ci->y;
 }
 
 double getRCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return 0.0;
+    }
     return ci->r;
 }
 
 char *getCorBCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return "";
+    }
     return ci->corBo;
 }
 
 char *getCorPCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
+    if (ci == NULL) {
+        return "";
+    }
     return ci->corPr;
 }
 
@@ -100,7 +121,7 @@ void setYCirculo(Circulo c, double yNovo){
     CIRCULOC* ci = (CIRCULOC*) c;
     if (ci == NULL) {
         return;
-    }    
+    }   
     ci->y = yNovo;
 }
 
@@ -138,7 +159,7 @@ double calcAreaCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
     if (ci == NULL) {
         return 0.0;
-    }    
+    }   
     // Fórmula da área do círculo: pi * r²
     return M_PI * ci->r * ci->r;
 }

@@ -23,8 +23,6 @@ typedef void* Circulo;
  * @return Retorna o ponteiro para o círculo criado.
  *
  * @details Cria um círculo, inicializa seus atributos e retorna um ponteiro para ele.
- *
- * @warning Caso dê erro de alocação de memória, o programa encerra.
  */
 Circulo criarCirculo(int id, double x, double y, double r, char *corB, char *corP);
 

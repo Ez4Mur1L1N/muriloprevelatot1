@@ -46,6 +46,9 @@ Retangulo criarRetangulo(int id, double x, double y, double w, double h, char *c
 
 void destroiRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return;
+    }
     free(re->corBo);
     free(re->corPr);
     free(re);
@@ -53,41 +56,65 @@ void destroiRetangulo(Retangulo r){
 
 int getIDRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return -1;
+    }
     return re->id;
 }
 
 TipoForma getTipoRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return -1;
+    }
     return re->tipo;
 }
 
 double getXRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return 0.0;
+    }
     return re->x;
 }
 
 double getYRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return 0.0;
+    }
     return re->y;
 }
 
 double getWRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return 0.0;
+    }
     return re->w;
 }
 
 double getHRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return 0.0;
+    }
     return re->h;
 }
 
 char *getCorBRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return "";
+    }
     return re->corBo;
 }
 
 char *getCorPRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
+    if (re == NULL) {
+        return "";
+    }
     return re->corPr;
 }
 

@@ -41,7 +41,7 @@ Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor){
 void destroiLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
     if(li == NULL){
-        return NULL;
+        return;
     }
     free(li->cor);
     free(li);
@@ -49,36 +49,57 @@ void destroiLinha(Linha l){
 
 int getIDLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return -1;
+    }
     return li->id;
 }
 
 TipoForma getTipoLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return -1;
+    }
     return li->tipo;
 }
 
 double getX1Linha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return 0.0;
+    }
     return li->x1;
 }
 
 double getY1Linha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return 0.0;
+    }
     return li->y1;
 }
 
 double getX2Linha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return 0.0;
+    }
     return li->x2;
 }
 
 double getY2Linha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return 0.0;
+    }
     return li->y2;
 }
 
 char *getCorLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if (li == NULL) {
+        return "";
+    }
     return li->cor;
 }
 
@@ -86,7 +107,7 @@ void setX1Linha(Linha l, double x1Novo){
     LINHAL* li = (LINHAL*) l;
     if (li == NULL) {
         return;
-    }    
+    }
     li->x1 = x1Novo;
 }
 
@@ -94,7 +115,7 @@ void setY1Linha(Linha l, double y1Novo){
     LINHAL* li = (LINHAL*) l;
     if (li == NULL) {
         return;
-    }    
+    }
     li->y1 = y1Novo;
 }
 
@@ -138,6 +159,6 @@ double calcAreaLinha(Linha l){
     double dy = li->y2 - li->y1;
     double comprimento = sqrt(dx*dx + dy*dy); 
 
-    // Convenção do projeto: Área = 2.0 * comprimento
+    // Convenção do projeto: Área = 2.0 * comprimento
     return 2.0 * comprimento;
 }
