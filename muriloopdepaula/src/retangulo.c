@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "retangulo.h"
+#include "tipos.h"
 
 typedef struct{
     int id;
+    TipoForma tipo;
     double x;
     double y;
     double w;
@@ -21,6 +23,7 @@ Retangulo criarRetangulo(int id, double x, double y, double w, double h, char *c
     }
 
     re->id = id;
+    re->tipo = RETANGULO;
     re->x = x;
     re->y = y;
     re->w = w;
@@ -51,6 +54,11 @@ void destroiRetangulo(Retangulo r){
 int getIDRetangulo(Retangulo r){
     RETANGULOR* re = (RETANGULOR*) r;
     return re->id;
+}
+
+TipoForma getTipoRetangulo(Retangulo r){
+    RETANGULOR* re = (RETANGULOR*) r;
+    return re->tipo;
 }
 
 double getXRetangulo(Retangulo r){

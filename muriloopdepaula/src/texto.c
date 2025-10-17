@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "texto.h"
+#include "tipos.h"
 
 typedef struct estiloTexto{
     char *fFamily;
@@ -11,6 +12,7 @@ typedef struct estiloTexto{
 
 typedef struct{
     int id;
+    TipoForma tipo;
     double x;
     double y;
     char *corBo;
@@ -28,6 +30,7 @@ Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, cha
     }
 
     te->id = id;
+    te->tipo = TEXTO;
     te->x = x;
     te->y = y;
     te->a = a;
@@ -73,6 +76,9 @@ Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, cha
 
 void destroiTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
+    if(te == NULL){
+        return NULL
+    }
     free(te->corBo);
     free(te->corPr);
     free(te->texto);
@@ -85,6 +91,11 @@ void destroiTexto(Texto t){
 int getIDTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
     return te->id;
+}
+
+TipoForma getTipoTexto(Texto t){
+    TEXTOT* te = (TEXTOT*) t;
+    return te->tipo; 
 }
 
 double getXTexto(Texto t){

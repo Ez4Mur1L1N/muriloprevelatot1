@@ -3,9 +3,11 @@
 #include <string.h>
 #include <math.h> //Para o cálculo da área.
 #include "circulo.h"
+#include "tipos.h"
 
 typedef struct{
     int id;
+    TipoForma tipo;
     double x;
     double y;
     double r;
@@ -21,6 +23,7 @@ Circulo criarCirculo(int id, double x, double y, double r, char *corB, char *cor
     }
 
     ci->id = id;
+    ci->tipo = CIRCULO;
     ci->x = x;
     ci->y = y;
     ci->r = r;
@@ -53,6 +56,11 @@ void destroiCirculo(Circulo c){
 int getIDCirculo(Circulo c){
     CIRCULOC* ci = (CIRCULOC*) c;
     return ci->id;
+}
+
+TipoForma getTipoCirculo(Circulo c){
+    CIRCULOC* ci = (CIRCULOC*) c;
+    return ci->tipo;
 }
 
 double getXCirculo(Circulo c){

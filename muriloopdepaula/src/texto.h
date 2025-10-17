@@ -48,6 +48,15 @@ void destroiTexto(Texto t);
 int getIDTexto(Texto t);
 
 /**
+ * @brief Função que 'pega' o 'tipo' do texto.
+ * 
+ * @param Texto Ponteiro do texto analisado.
+ *
+ * @return Retorna a 'etiqueta' da forma.
+ */
+TipoForma getTipoTexto(Texto t); 
+
+/**
  * @brief Função que 'pega' a coordenada âncora 'X' do texto.
  * 
  * @param Texto Ponteiro do texto analisado.

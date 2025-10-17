@@ -45,6 +45,15 @@ void destroiCirculo(Circulo c);
 int getIDCirculo(Circulo c);
 
 /**
+ * @brief Função que 'pega' o 'tipo' do círculo.
+ * 
+ * @param Circulo Ponteiro do círculo analisado. 
+ *
+ * @return Retorna a 'etiqueta' da forma.
+ */
+TipoForma getTipoCirculo(Circulo c); 
+
+/**
  * @brief Função que 'pega' a coordenada 'X' (plano cartesiano) do círculo.
  *
  * @param Circulo Ponteiro do círculo analisado.

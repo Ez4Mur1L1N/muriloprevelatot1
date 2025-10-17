@@ -44,6 +44,15 @@ void destroiLinha(Linha l);
 int getIDLinha(Linha l);
 
 /**
+ * @brief Função que 'pega' o 'tipo' da linha.
+ * 
+ * @param Linha Ponteiro da linha analisada.
+ *
+ * @return Retorna a 'etiqueta' da forma.
+ */
+TipoForma getTipoLinha(Linha l); 
+
+/**
  * @brief Função que 'pega' a coordenada 'X' (plano cartesiano) do início da linha.
  *
  * @param Linha Ponteiro da linha analisada.

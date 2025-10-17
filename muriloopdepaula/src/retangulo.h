@@ -46,6 +46,15 @@ void destroiRetangulo(Retangulo r);
 int getIDRetangulo(Retangulo r);
 
 /**
+ * @brief Função que 'pega' o 'tipo' do retângulo.
+ * 
+ * @param Retangulo Ponteiro do retângulo analisado.
+ *
+ * @return Retorna a 'etiqueta' da forma.
+ */
+TipoForma getTipoRetangulo(Retangulo r); 
+
+/**
  * @brief Função que 'pega' a coordenada 'X' (plano cartesiano) do retângulo.
  *
  * @param Retangulo Ponteiro do retângulo analisado.

@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "linha.h"
+#include "tipos.h"
 
 typedef struct{
     int id;
+    TipoForma tipo;
     double x1;
     double y1;
     double x2;
@@ -20,6 +23,7 @@ Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor){
     }
 
     li->id = id;
+    li->tipo = LINHA;
     li->x1 = x1;
     li->y1 = y1;
     li->x2 = x2;
@@ -36,6 +40,9 @@ Linha criarLinha(int id, double x1, double y1, double x2, double y2, char *cor){
 
 void destroiLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
+    if(li == NULL){
+        return NULL;
+    }
     free(li->cor);
     free(li);
 }
@@ -43,6 +50,11 @@ void destroiLinha(Linha l){
 int getIDLinha(Linha l){
     LINHAL* li = (LINHAL*) l;
     return li->id;
+}
+
+TipoForma getTipoLinha(Linha l){
+    LINHAL* li = (LINHAL*) l;
+    return li->tipo;
 }
 
 double getX1Linha(Linha l){
