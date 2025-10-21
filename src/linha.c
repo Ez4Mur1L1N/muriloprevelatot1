@@ -162,3 +162,34 @@ double calcAreaLinha(Linha l){
     // Convenção do projeto: Área = 2.0 * comprimento
     return 2.0 * comprimento;
 }
+
+Linha clonarLinha(Linha l, int IDnovo){
+    LINHAL* li = (LINHAL*) l;
+    if(li == NULL){
+        return NULL;
+    }
+
+    LINHAL* clone = (LINHAL*) malloc(sizeof(LINHAL));
+    if(clone == NULL){
+        printf("Erro ao alocar memoria! Programa encerrado.");
+        exit(1);
+    }
+
+    clone->id = IDnovo;
+    clone->tipo = li->tipo;
+    clone->x1 = li->x1;
+    clone->y1 = li->y1;
+    clone->x2 = li->x2;
+    clone->y2 = li->y2;
+    clone->cor = (char*) malloc(strlen(li->cor) + 1);
+
+    if (clone->cor == NULL) {
+        printf("Erro de memoria ao clonar cores da linha!\n");
+        free(clone->cor); 
+        free(clone);        
+        return NULL; // Caso dê erro, libera as memórias.
+    }
+    strcpy(clone->cor, li->cor);
+
+    return clone;
+}

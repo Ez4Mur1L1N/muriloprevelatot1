@@ -8,6 +8,9 @@
 #include "linha.h"
 #include "retangulo.h"
 #include "texto.h"
+#include "arena.h"
+#include "disparador.h"
+#include "lista.h"
 
 /*
 TAD que será utilizado para descrever as funcionalidades para a criação de um arquivo SVG.
@@ -88,5 +91,21 @@ void svgDesenhaAsterisco(FILE* arqSvg, double x, double y);
  * @param cor Indica a cor do contorno.
  */
 void svgDesenhaBordaTracejada(FILE* arqSVG, double x, double y, double w, double h, char *cor);
+
+/**
+ * @brief Gera um SVG completo do estado da simulação até determinado, incluindo anotações.
+ * 
+ * @param caminhoSvg O nome completo do arquivo SVG a ser criado (ex: "saida/t1-t1-1.svg").
+ * @param chao A lista de formas que estão no "chão".
+ * @param arena A arena (fila) de formas.
+ * @param disparadores O array de todos os disparadores.
+ * @param maxDisparadores O tamanho do array (ex: MAX_ARSENAL).
+ * @param formaDisparada A forma específica que foi disparada (para destacar).
+ * @param x1 Ponto de origem "x" da anotação (posição do disparador).
+ * @param y1 Ponto de origem "y" da anotação (posição do disparador).
+ * @param x2 Ponto de destino "x" da anotação (posição final da forma).
+ * @param y2 Ponto de destino "y" da anotação (posição final da forma).
+ */
+void geraSvgConsulta(const char* caminhoSvg, Lista chao, Arena arena, Disparador* disparadores, int maxDisparadores,void* formaDisparada, double x1, double y1, double x2, double y2);
 
 #endif

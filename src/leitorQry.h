@@ -2,6 +2,7 @@
 #define LEITORQRY_H
 
 #include "leitorGeo.h" 
+#include "lista.h"
 // Para ter acesso a lista genérica "ListaFormas".
 
 /*
@@ -16,10 +17,12 @@ para executar as ações da simulação, gerando as saídas .svg e .txt.
  *
  * @param listaFormas A lista de formas original, criada pelo LeitorGeo.
  * @param caminhoArquivoQry O caminho/nome do arquivo .qry a ser lido.
- * @param caminhoSaidaSVG O caminho/nome do arquivo .svg que será gerado.
  * @param caminhoSaidaTXT O caminho/nome do arquivo .txt que será gerado.
+ * @param dirSaida O diretório para para a pasta onde os arquivos da saída serão designados.
+ * @param nomeBase
+ * @param nomeQryBase
  */
-void lerArqQry(ListaFormas listaFormas, char* caminhoArqQry, char* caminhoSaidaSVG, char* caminhoSaidaTXT);
+void lerArqQry(ListaFormas listaFormas, char* caminhoArqQry, char* caminhoSaidaTXT, char* dirSaida, char* nomeBase, char* nomeQryBase);
 
 
 #endif

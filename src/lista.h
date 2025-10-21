@@ -42,6 +42,16 @@ void destroiLista(Lista l, void (*destroiConteudo)(Conteudo c));
 No insereFinalLista(Lista l, Conteudo c);
 
 /**
+ * @brief Função que insere um novo elemento no início da lista.
+ * 
+ * @param lista Ponteiro da lista analisada.
+ * @param Conteudo Ponteiro para o elemento(conteúdo) a ser inserido.
+ * 
+ * @return Retorna o ponteiro para o nó criado.
+ */
+No insereNoComecoLista(Lista lista, Conteudo c);
+
+/**
  * @brief Função que remove um nó da lista.
  * 
  * @param Lista Ponteiro da lista analisada.
@@ -61,6 +71,15 @@ Conteudo removeNoLista(Lista l, No n);
  * @warning Retorna NULL se estiver vazia. 
  */
 No getPrimeiroNoLista(Lista l);
+
+/**
+ * @brief Função que obtém o número de elementos atualmente na lista.
+ * 
+ * @param lista Ponteiro da lista analisada.
+ * 
+ * @return O número de elementos (tamanho) da lista, ou -1 se a lista for inválida.
+ */
+int getTamanhoLista(Lista lista);
 
 /**
  * @brief Função que retorna o último nó da lista.

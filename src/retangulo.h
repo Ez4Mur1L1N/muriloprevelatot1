@@ -155,4 +155,14 @@ void setCorPRetangulo(Retangulo r, char *corPNova);
  */
 double calcAreaRetangulo(Retangulo r);
 
+/**
+ * @brief Função que clona um retângulo.
+ * 
+ * @param Retangulo Ponteiro do retângulo original analisado. 
+ * @param IDnovo Novo ID (único) para o clone.
+ *  
+ * @return Ponteiro para a nova forma clonada. 
+ */
+Retangulo clonarRetangulo(Retangulo r, int IDnovo);
+
 #endif

@@ -170,3 +170,37 @@ double calcAreaRetangulo(Retangulo r){
     // Fórmula da área do retângulo: largura * altura
     return re->w * re->h;
 }
+
+Retangulo clonarRetangulo(Retangulo r, int IDnovo){
+    RETANGULOR* re = (RETANGULOR*) r;
+    if(re == NULL){
+        return NULL;
+    }
+
+    RETANGULOR* clone = (RETANGULOR*) malloc(sizeof(RETANGULOR));
+    if(clone == NULL){
+        printf("Erro ao alocar memoria! Programa encerrado.");
+        exit(1);
+    }
+
+    clone->id = IDnovo;
+    clone->tipo = re->tipo;
+    clone->x = re->x;
+    clone->y = re->y;
+    clone->h = re->h;
+    clone->w = re->h;
+    clone->corBo = (char*) malloc(strlen(re->corBo) + 1);
+    clone->corPr = (char*) malloc(strlen(re->corPr) + 1);
+
+    if (clone->corBo == NULL || clone->corPr == NULL) {
+        printf("Erro de memoria ao clonar cores do retangulo!\n");
+        free(clone->corBo); 
+        free(clone->corPr);
+        free(clone);        
+        return NULL; // Caso dê erro, libera as memórias.
+    }
+    strcpy(clone->corBo, re->corBo);
+    strcpy(clone->corPr, re->corPr);
+
+    return clone;
+}

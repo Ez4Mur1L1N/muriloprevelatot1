@@ -178,4 +178,14 @@ void setCorPTexto(Texto t, char *corPNova);
  */
 double calcAreaTexto(Texto t);
 
+/**
+ * @brief Função que clona um texto.
+ * 
+ * @param Linha Ponteiro do texto original analisado. 
+ * @param IDnovo Novo ID (único) para o clone.
+ *  
+ * @return Ponteiro para a nova forma clonada. 
+ */
+Texto clonarRetangulo(Texto t, int IDnovo);
+
 #endif

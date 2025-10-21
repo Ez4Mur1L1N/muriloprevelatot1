@@ -153,4 +153,14 @@ void setCorLinha(Linha l, char *corNova);
  */
 double calcAreaLinha(Linha l);
 
+/**
+ * @brief Função que clona uma linha.
+ * 
+ * @param Linha Ponteiro da linha original analisada. 
+ * @param IDnovo Novo ID (único) para o clone.
+ *  
+ * @return Ponteiro para a nova forma clonada. 
+ */
+Linha clonarRetangulo(Linha l, int IDnovo);
+
 #endif

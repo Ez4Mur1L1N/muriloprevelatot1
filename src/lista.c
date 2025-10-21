@@ -80,6 +80,38 @@ No insereFinalLista(Lista l, Conteudo c){
     return novo;
 }
 
+No insereNoComecoLista(Lista l, Conteudo c){
+    LISTAL* li = (LISTAL*) l;
+    if(li == NULL){
+        return NULL; 
+    }
+
+    NO novo = (NO) malloc(sizeof(NOS));
+    if(novo == NULL){
+        printf("Erro ao alocar memoria para novo no! Programa encerrado.");
+        exit(1);
+    }
+
+    novo->conteudo = c;
+    novo->prox = li->inicio;
+    novo->ant = NULL;      
+
+    // Vamos trabalhar dois casos agora:
+    // Lista não estava vazia:
+    if(li->inicio != NULL){
+        li->inicio->ant = novo; 
+    }
+    li->inicio = novo; 
+
+    // Lista estava vazia:
+    if(li->fim == NULL){
+        li->fim = novo; 
+    }
+
+    li->tamanho++;
+    return novo;
+}
+
 Conteudo removeNoLista(Lista l, No n){
     LISTAL* li = (LISTAL*) l;
     NO noLista = (NO) n;
@@ -115,6 +147,14 @@ No getPrimeiroNoLista(Lista l){
         return NULL;
     }
     return li->inicio;
+}
+
+int getTamanhoLista(Lista lista){
+    LISTAL* li = (LISTAL*) lista;
+    if(li == NULL){
+        return -1;
+    }
+    return li->tamanho;
 }
 
 No getUltimoNoLista(Lista l){

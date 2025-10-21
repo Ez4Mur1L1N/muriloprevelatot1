@@ -228,3 +228,50 @@ double calcAreaTexto(Texto t) {
     // Convenção do projeto: Área = 20.0 * número de caracteres
     return 20.0 * strlen(te->texto);
 }
+
+Texto clonarTexto(Texto t, int IDnovo){
+    TEXTOT* te = (TEXTOT*) t;
+    if(te == NULL){
+        return NULL;
+    }
+
+    TEXTOT* clone = (TEXTOT*) malloc(sizeof(TEXTOT));
+    if(clone == NULL){
+        printf("Erro ao alocar memoria! Programa encerrado.");
+        exit(1);
+    }
+
+    clone->id = IDnovo;
+    clone->tipo = te->tipo;
+    clone->x = te->x;
+    clone->y = te->y;
+    clone->a = te->a;
+
+    clone->corBo = (char*) malloc(strlen(te->corBo) + 1);
+    clone->corPr = (char*) malloc(strlen(te->corPr) + 1);
+    clone->texto = (char*) malloc(strlen(te->texto) + 1);
+    clone->estilo.fFamily = (char*) malloc(strlen(te->estilo.fFamily) + 1);
+    clone->estilo.fWeight = (char*) malloc(strlen(te->estilo.fWeight) + 1);    
+    clone->estilo.fSize = (char*) malloc(strlen(te->estilo.fSize) + 1);
+
+
+    if (clone->corBo == NULL || clone->corPr == NULL || clone->texto == NULL || clone->estilo.fFamily == NULL || clone->estilo.fWeight == NULL || clone->estilo.fSize == NULL) {
+        printf("Erro de memoria ao clonar cores da Texto!\n");
+        free(clone->corBo);
+        free(clone->corPr); 
+        free(clone->texto); 
+        free(clone->estilo.fFamily);
+        free(clone->estilo.fWeight); 
+        free(clone->estilo.fSize); 
+        free(clone);        
+        return NULL; // Caso dê erro, libera as memórias.
+    }
+    strcpy(clone->corBo, te->corBo);
+    strcpy(clone->corPr, te->corPr);
+    strcpy(clone->texto, te->texto);
+    strcpy(clone->estilo.fFamily, te->estilo.fFamily);
+    strcpy(clone->estilo.fWeight, te->estilo.fWeight);
+    strcpy(clone->estilo.fSize, te->estilo.fSize);
+
+    return clone;
+}

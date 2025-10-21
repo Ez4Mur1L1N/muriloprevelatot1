@@ -5,6 +5,7 @@
 
 /*
 TAD que representa a arena do jogo.
+É nesse ambiente que realmente ocorrerão as situações do jogo (ex: sobreposições,...).
 Pensando no projeto e na descrição, a arena vai atuar como uma fila (FIFO).
 */
 

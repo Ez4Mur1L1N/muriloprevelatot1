@@ -134,30 +134,48 @@ void *disparar(Disparador d){
 
 int getIdDisparador(Disparador d){
     DISPARADORD* di = (DISPARADORD*) d;
+    if (di == NULL) {
+        return -1; 
+    }
     return di->id;
 }
 
 double getXDisparador(Disparador d){
     DISPARADORD* di = (DISPARADORD*) d;
+    if (di == NULL) {
+        return 0.0; 
+    }
     return di->x;
 }
 
 double getYDisparador(Disparador d){
     DISPARADORD* di = (DISPARADORD*) d;
+    if (di == NULL) {
+        return 0.0; 
+    }
     return di->y;
 }
 
 Carregador getCarrEsquerdaDisparador(Disparador d){
     DISPARADORD* di = (DISPARADORD*) d;
+    if (di == NULL) {
+        return NULL; 
+    }
     return di->caEsquerdo;
 }
 
 Carregador getCarrDireitaDisparador(Disparador d){
     DISPARADORD* di = (DISPARADORD*) d;
+    if (di == NULL) {
+        return NULL; 
+    }
     return di->caDireito;
 }
 
 void *getFormaArmadaDisparador(Disparador d){
     DISPARADORD* di = (DISPARADORD*) d;
+    if (di == NULL) {
+        return NULL; 
+    }
     return di->formaDisparo;
 }

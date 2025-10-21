@@ -165,3 +165,36 @@ double calcAreaCirculo(Circulo c){
     // Fórmula da área do círculo: pi * r²
     return PI * ci->r * ci->r;
 }
+
+Circulo clonarCirculo(Circulo c, int IDnovo){
+    CIRCULOC* ci = (CIRCULOC*) c;
+    if(ci == NULL){
+        return NULL;
+    }
+
+    CIRCULOC* clone = (CIRCULOC*) malloc(sizeof(CIRCULOC));
+    if(clone == NULL){
+        printf("Erro ao alocar memoria! Programa encerrado.");
+        exit(1);
+    }
+
+    clone->id = IDnovo;
+    clone->tipo = ci->tipo;
+    clone->x = ci->x;
+    clone->y = ci->y;
+    clone->r = ci->r;
+    clone->corBo = (char*) malloc(strlen(ci->corBo) + 1);
+    clone->corPr = (char*) malloc(strlen(ci->corPr) + 1);
+
+    if (clone->corBo == NULL || clone->corPr == NULL) {
+        printf("Erro de memoria ao clonar cores do circulo!\n");
+        free(clone->corBo); 
+        free(clone->corPr);
+        free(clone);        
+        return NULL; // Caso dê erro, libera as memórias.
+    }
+    strcpy(clone->corBo, ci->corBo);
+    strcpy(clone->corPr, ci->corPr);
+
+    return clone;
+}

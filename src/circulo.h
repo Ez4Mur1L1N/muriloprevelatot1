@@ -142,4 +142,14 @@ void setCorPCirculo(Circulo c, char *corPNova);
  */
 double calcAreaCirculo(Circulo c);
 
+/**
+ * @brief Função que clona um círculo
+ * 
+ * @param Circulo Ponteiro do círculo original analisado. 
+ * @param IDnovo Novo ID (único) para o clone.
+ *  
+ * @return Ponteiro para a nova forma clonada. 
+ */
+Circulo clonarCirculo(Circulo c, int IDnovo);
+
 #endif
