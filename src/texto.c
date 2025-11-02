@@ -17,12 +17,12 @@ typedef struct{
     double y;
     char *corBo;
     char *corPr;
-    char a; //âncora
+    char *an; //âncora
     char *texto;
     EstiloTexto estilo;
 } TEXTOT;
 
-Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, char *texto, char *fFamily, char *fWeight, char *fSize){
+Texto criarTexto(int id, double x, double y, char *corB, char *corP, char *a, char *texto, char *fFamily, char *fWeight, char *fSize){
     TEXTOT* te = (TEXTOT*) malloc(sizeof(TEXTOT));
     if(te == NULL){
         printf("Erro ao alocar memoria! Programa encerrado.");
@@ -33,7 +33,6 @@ Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, cha
     te->tipo = TEXTO;
     te->x = x;
     te->y = y;
-    te->a = a;
     te->corBo = (char*) malloc(sizeof(char)*(strlen(corB)+1));
     if(te->corBo == NULL){
         printf("Erro ao alocar memoria.");
@@ -46,6 +45,12 @@ Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, cha
         exit(1);
     }
     strcpy(te->corPr, corP);
+    te->an = (char*) malloc(sizeof(char)*(strlen(a)+1));
+    if(te->an == NULL){
+        printf("Erro ao alocar memoria.");
+        exit(1);
+    }
+    strcpy(te->an, a);
     te->texto = (char*) malloc(sizeof(char)*(strlen(texto)+1));
     if(te->texto == NULL){
         printf("Erro ao alocar memoria.");
@@ -81,6 +86,7 @@ void destroiTexto(Texto t){
     }
     free(te->corBo);
     free(te->corPr);
+    free(te->an);
     free(te->texto);
     free(te->estilo.fFamily);
     free(te->estilo.fWeight);
@@ -136,12 +142,12 @@ char *getCorPTexto(Texto t){
     return te->corPr;
 }
 
-char getAncoraTexto(Texto t){
+char *getAncoraTexto(Texto t){
     TEXTOT* te = (TEXTOT*) t;
     if (te == NULL) {
-        return ' ';
+        return "";
     }
-    return te->a;
+    return te->an;
 }
 
 char *getTexto_Texto(Texto t){
@@ -245,20 +251,21 @@ Texto clonarTexto(Texto t, int IDnovo){
     clone->tipo = te->tipo;
     clone->x = te->x;
     clone->y = te->y;
-    clone->a = te->a;
 
     clone->corBo = (char*) malloc(strlen(te->corBo) + 1);
     clone->corPr = (char*) malloc(strlen(te->corPr) + 1);
+    clone->an = (char*) malloc(strlen(te->an) + 1);
     clone->texto = (char*) malloc(strlen(te->texto) + 1);
     clone->estilo.fFamily = (char*) malloc(strlen(te->estilo.fFamily) + 1);
     clone->estilo.fWeight = (char*) malloc(strlen(te->estilo.fWeight) + 1);    
     clone->estilo.fSize = (char*) malloc(strlen(te->estilo.fSize) + 1);
 
 
-    if (clone->corBo == NULL || clone->corPr == NULL || clone->texto == NULL || clone->estilo.fFamily == NULL || clone->estilo.fWeight == NULL || clone->estilo.fSize == NULL) {
+    if (clone->corBo == NULL || clone->corPr == NULL || clone->an == NULL || clone->texto == NULL || clone->estilo.fFamily == NULL || clone->estilo.fWeight == NULL || clone->estilo.fSize == NULL) {
         printf("Erro de memoria ao clonar cores da Texto!\n");
         free(clone->corBo);
         free(clone->corPr); 
+        free(clone->an);
         free(clone->texto); 
         free(clone->estilo.fFamily);
         free(clone->estilo.fWeight); 
@@ -268,6 +275,7 @@ Texto clonarTexto(Texto t, int IDnovo){
     }
     strcpy(clone->corBo, te->corBo);
     strcpy(clone->corPr, te->corPr);
+    strcpy(clone->an, te->an);
     strcpy(clone->texto, te->texto);
     strcpy(clone->estilo.fFamily, te->estilo.fFamily);
     strcpy(clone->estilo.fWeight, te->estilo.fWeight);

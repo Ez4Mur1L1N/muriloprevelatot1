@@ -21,7 +21,7 @@ typedef void* Texto;
  * @param y Indica a coordenada 'Y' da âncora do texto.
  * @param corB Indica a cor da borda do texto.
  * @param corP Indica a cor de preenchimento do texto.
- * @param a Indica a posição da coordenada âncora (i-inicio/m-meio/f-final).
+ * @param a Indica a posição da coordenada âncora (inicio/meio/final).
  * @param texto Indica a mensagem em si.
  * @param fFamily Indica a família da fonte do texto;
  * @param fWeight Indica o 'peso' da fonte do texto.
@@ -31,7 +31,7 @@ typedef void* Texto;
  *
  * @warning Caso dê erro de alocação de memória, o programa encerra.
  */
-Texto criarTexto(int id, double x, double y, char *corB, char *corP, char a, char *texto, char *fFamily, char *fWeight, char *fSize);
+Texto criarTexto(int id, double x, double y, char *corB, char *corP, char* a, char *texto, char *fFamily, char *fWeight, char *fSize);
 
 /**
  * @brief Função que libera toda memória alocada para o texto.
@@ -101,7 +101,7 @@ char *getCorPTexto(Texto t);
  *
  * @return Um char que representa a posição da coordenada âncora.
  */
-char getAncoraTexto(Texto t);
+char *getAncoraTexto(Texto t);
 
 /**
  * @brief Função que 'pega' o texto em si (mensagem).
@@ -186,6 +186,6 @@ double calcAreaTexto(Texto t);
  *  
  * @return Ponteiro para a nova forma clonada. 
  */
-Texto clonarRetangulo(Texto t, int IDnovo);
+Texto clonarTexto(Texto t, int IDnovo);
 
 #endif

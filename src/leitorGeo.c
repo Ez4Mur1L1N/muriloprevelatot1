@@ -10,49 +10,104 @@
 #include "texto.h"
 
 ListaFormas lerArqGeo(char *caminhoAqrGeo) {
-    FILE* arqGeo = fopen(caminhoAqrGeo, "r"); // Como indicado, só vamos ler!! esse arquivo.
+    FILE* arqGeo = fopen(caminhoAqrGeo, "r");
     if (arqGeo == NULL) {
         printf("Erro ao abrir o arquivo .geo em: %s  !! Programa encerrado.", caminhoAqrGeo);
         exit(1);
     }
 
-    Lista formas = criarLista(); // Usando nosso TAD Lista
+    Lista formas = criarLista();
 
     char linha[512];
     int id;
     double x, y, r, w, h, x2, y2;
-    char corB[32], corP[32], ancora, texto[256], fFamily[64], fWeight[32], fSize[16];
+    char corB[32], corP[32], ancora[32], texto[256];
+    
+    // Padrões de segurança para o estilo (Sua ideia)
+    char fFamily_atual[64], fWeight_atual[32], fSize_atual[16];
+    strcpy(fFamily_atual, "Arial");
+    strcpy(fWeight_atual, "normal");
+    strcpy(fSize_atual, "12px");
 
     while (fgets(linha, sizeof(linha), arqGeo)) {
-        linha[strcspn(linha, "\n")] = 0;
-        char comando = linha[0];
+        linha[strcspn(linha, "\n")] = 0; // Remove o \n
         
-        switch (comando) {
-            case 'c':
-                sscanf(linha, "c %d %lf %lf %lf %s %s", &id, &x, &y, &r, corB, corP);
-                insereFinalLista(formas, criarCirculo(id, x, y, r, corB, corP));
-                break;
-            case 'r':
-                sscanf(linha, "r %d %lf %lf %lf %lf %s %s", &id, &x, &y, &w, &h, corB, corP);
-                insereFinalLista(formas, criarRetangulo(id, x, y, w, h, corB, corP));
-                break;
-            case 'l':
-                sscanf(linha, "l %d %lf %lf %lf %lf %s", &id, &x, &y, &x2, &y2, corB);
-                insereFinalLista(formas, criarLinha(id, x, y, x2, y2, corB));
-                break;
-            case 't':
-                sscanf(linha, "t %d %lf %lf %s %s %c %s %s %s %[^\n]", &id, &x, &y, corB, corP, &ancora, fFamily, fWeight, fSize, texto);
-                insereFinalLista(formas, criarTexto(id, x, y, corB, corP, ancora, texto, fFamily, fWeight, fSize));
-                break;
+        char comando[10];
+        sscanf(linha, "%s", comando); 
+        
+        // Limpar buffers.
+        corB[0] = '\0';
+        corP[0] = '\0';
+        texto[0] = '\0';
+        ancora[0] = '\0'; 
+
+        if (strcmp(comando, "c") == 0) {
+            sscanf(linha, "c %d %lf %lf %lf %s %s", &id, &x, &y, &r, corB, corP);
+            insereFinalLista(formas, criarCirculo(id, x, y, r, corB, corP));
+        
+        } else if (strcmp(comando, "r") == 0) {
+            sscanf(linha, "r %d %lf %lf %lf %lf %s %s", &id, &x, &y, &w, &h, corB, corP);
+            insereFinalLista(formas, criarRetangulo(id, x, y, w, h, corB, corP));
+        
+        } else if (strcmp(comando, "l") == 0) {
+            sscanf(linha, "l %d %lf %lf %lf %lf %s", &id, &x, &y, &x2, &y2, corB);
+            insereFinalLista(formas, criarLinha(id, x, y, x2, y2, corB));
+        
+        } else if (strcmp(comando, "ts") == 0) {
+            // "Muda o estilo dos textos (comando t) subsequentes."
+            sscanf(linha, "ts %s %s %s", fFamily_atual, fWeight_atual, fSize_atual);
+        
+        } else if (strcmp(comando, "t") == 0) {
+
+            strcpy(corB, "black");
+            strcpy(corP, "black");
+            strcpy(ancora, "i");
+            texto[0] = '\0';
+
+
+            int camposLidos = sscanf(linha, "t %d %lf %lf %s %s %s", &id, &x, &y, corB, corP, ancora);
+            
+            if (camposLidos < 3) { 
+                 fprintf(stderr, "Linha 't' mal formatada: %s\n", linha);
+                 continue; 
+            }
+
+            char* ponteiro = linha;
+            int camposASaltar = 7;
+            if (camposLidos < 6) {
+                camposASaltar = camposLidos + 1; 
+            }
+
+            int campos = 0;
+            while (campos < camposASaltar && ponteiro != NULL && *ponteiro != '\0') {
+                while (*ponteiro != ' ' && *ponteiro != '\0') ponteiro++; 
+                while (*ponteiro == ' ') ponteiro++; 
+                campos++;
+            }
+            
+            if (ponteiro != NULL && *ponteiro != '\0') {
+                if (*ponteiro == '"') {
+                    ponteiro++;
+                }
+                strncpy(texto, ponteiro, 255);
+                texto[255] = '\0';
+
+                int len = strlen(texto);
+                if (len > 0 && texto[len - 1] == '"') {
+                    texto[len - 1] = '\0';
+                }
+            }
+            
+            
+            insereFinalLista(formas, criarTexto(id, x, y, corB, corP, ancora, texto, fFamily_atual, fWeight_atual, fSize_atual));
         }
-    }
+    } // Fim do while
 
     fclose(arqGeo);
-    return (ListaFormas) formas; // Faz o cast para o seu tipo
+    return (ListaFormas) formas;
 }
 
 void destroiListaFormasGeo(ListaFormas lst) {
-    //Para não dar vazamento ou acesso indevido de memória, farei essa iteração no main!.
     Lista lista = (Lista) lst;
-    destroiLista(lista, NULL); // Passa NULL para não tentar destruir o conteúdo aqui.
+    destroiLista(lista, NULL); 
 }

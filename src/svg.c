@@ -6,6 +6,8 @@
 #include "disparador.h"
 #include "processaFormas.h"
 
+#define OPACIDADE 0.7
+
 void abreSVG(FILE* arqSVG){
     if(arqSVG == NULL){
         return;
@@ -24,25 +26,27 @@ void desenhaCirculoSVG(FILE* arqSVG, Circulo c){
     if(arqSVG == NULL || c == NULL){
         return;
     }
-    fprintf(arqSVG, "\t<circle cx=\"%f\" cy=\"%f\" r=\"%f\" stroke=\"%s\" fill=\"%s\" />\n",
+    fprintf(arqSVG, "\t<circle cx=\"%f\" cy=\"%f\" r=\"%f\" stroke=\"%s\" fill=\"%s\" fill-opacity=\"%.1f\" />\n",
             getXCirculo(c),
             getYCirculo(c),
             getRCirculo(c),
             getCorBCirculo(c),
-            getCorPCirculo(c));
+            getCorPCirculo(c),
+            OPACIDADE);
 }
 
 void desenhaRetanguloSVG(FILE* arqSVG, Retangulo r){
     if (arqSVG == NULL || r == NULL){
         return;
     }
-    fprintf(arqSVG, "\t<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" stroke=\"%s\" fill=\"%s\" />\n",
+    fprintf(arqSVG, "\t<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" stroke=\"%s\" fill=\"%s\" fill-opacity=\"%.1f\" />\n",
             getXRetangulo(r),
             getYRetangulo(r),
             getWRetangulo(r),
             getHRetangulo(r),
             getCorBRetangulo(r),
-            getCorPRetangulo(r));
+            getCorPRetangulo(r),
+            OPACIDADE);
 }
 
 void desenhaLinhaSVG(FILE* arqSVG, Linha l){
@@ -63,15 +67,15 @@ void desenhaTextoSVG(FILE* arqSVG, Texto t){
     }
     // Transformar a ancora para o jeito que o SVG entende
     char *ancoraTXT;
-    char ancoraC = getAncoraTexto(t);
-    if(ancoraC == 'i'){
+    char* ancoraStr = getAncoraTexto(t); // Agora retorna "i", "m", ou "f"
+    if (strcmp(ancoraStr, "i") == 0) {
         ancoraTXT = "start";
-    } else if(ancoraC == 'm'){
+    } else if (strcmp(ancoraStr, "m") == 0) {
         ancoraTXT = "middle";
-    } else{
+    } else {
         ancoraTXT = "end";
     }
-    fprintf(arqSVG, "\t<text x=\"%f\" y=\"%f\" stroke=\"%s\" fill=\"%s\" text-anchor=\"%s\" font-family=\"%s\" font-weight=\"%s\" font-size=\"%s\">%s</text>\n",
+    fprintf(arqSVG, "\t<text x=\"%f\" y=\"%f\" stroke=\"%s\" fill=\"%s\" text-anchor=\"%s\" font-family=\"%s\" font-weight=\"%s\" font-size=\"%s\" fill-opacity=\"%.1f\">%s</text>\n", // <-- ESPAÇO REMOVIDO AQUI
             getXTexto(t),
             getYTexto(t),
             getCorBTexto(t),
@@ -80,6 +84,7 @@ void desenhaTextoSVG(FILE* arqSVG, Texto t){
             getFonteFamilyTexto(t),
             getFonteWeightTexto(t),
             getFonteSizeTexto(t),
+            OPACIDADE,
             getTexto_Texto(t));
 }
 
@@ -98,7 +103,7 @@ void svgDesenhaBordaTracejada(FILE* arqSVG, double x, double y, double w, double
             x, y, w, h, cor);
 }
 
-void gerarSvgConsulta(const char* caminhoSvg, Lista chao, Arena arena, Disparador* disparadores, int maxDisparadores,void* formaDisparada, double x1, double y1, double x2, double y2){
+void geraSvgConsulta(const char* caminhoSvg, Lista chao, Arena arena, Disparador* disparadores, int maxDisparadores,void* formaDisparada, double x1, double y1, double x2, double y2){
     FILE* arqSvg = fopen(caminhoSvg, "w");
     if (arqSvg == NULL) {
         printf("Nao foi possivel criar o arquivo SVG da consulta em %s\n", caminhoSvg);
@@ -144,7 +149,7 @@ void gerarSvgConsulta(const char* caminhoSvg, Lista chao, Arena arena, Disparado
     while (getTamanhoLista(listaTempArena) > 0) {
         inserirFormaArena(arena, removeNoLista(listaTempArena, getPrimeiroNoLista(listaTempArena)));
     }
-    destroiListaFormasGeo(listaTempArena); // Destrói só a lista, não as formas.
+    destroiLista(listaTempArena, NULL); // Destrói só a lista, não as formas.
 
     // Desenho dos disparadores.
     for (int i = 0; i < maxDisparadores; i++) {

@@ -72,7 +72,16 @@ int main(int argc, char *argv[]) {
     }
 
     char nomeBase[256];
-    strcpy(nomeBase, arqGeoNome);
+    
+    char* barra = strrchr(arqGeoNome, '/'); 
+    char* inicioNome;
+
+    if (barra != NULL) {
+        inicioNome = barra + 1;
+    } else {
+        inicioNome = arqGeoNome;
+    }
+    strcpy(nomeBase, inicioNome); 
     char* ponto = strrchr(nomeBase, '.');
     if (ponto != NULL) {
         *ponto = '\0';
@@ -81,17 +90,31 @@ int main(int argc, char *argv[]) {
     char caminhoSvg[512];
     sprintf(caminhoSvg, "%s/%s.svg", dirSaida, nomeBase);
 
-    char caminhoTxt[512];
+char caminhoTxt[512];
     char nomeQrySemExt[256];
-    nomeQrySemExt[0] = '\0';
+    nomeQrySemExt[0] = '\0'; 
+
     if (arqQryNome != NULL) {
-        strcpy(nomeQrySemExt, arqQryNome);
-        ponto = strrchr(nomeQrySemExt, '.');
-        if (ponto != NULL) {
-            *ponto = '\0';
+        
+        char* barraQry = strrchr(arqQryNome, '/');
+        char* inicioNomeQry;
+
+        if (barraQry != NULL) {
+            inicioNomeQry = barraQry + 1;
+        } else {
+            inicioNomeQry = arqQryNome;
         }
-        // Cria um nome de arquivo combinado, ex: saida/t1-consultas.txt
-        sprintf(caminhoTxt, "%s/%s-%s.txt", dirSaida, nomeBase, nomeQrySemExt);
+        
+        strcpy(nomeQrySemExt, inicioNomeQry); 
+
+        char* pontoQry = strrchr(nomeQrySemExt, '.');
+        if (pontoQry != NULL) {
+            *pontoQry = '\0'; 
+        }
+        snprintf(caminhoTxt, sizeof(caminhoTxt), "%s/%s-%s.txt", dirSaida, nomeBase, nomeQrySemExt);
+        
+    } else {
+        snprintf(caminhoTxt, sizeof(caminhoTxt), "%s/%s.txt", dirSaida, nomeBase); 
     }
 
 
@@ -112,6 +135,11 @@ int main(int argc, char *argv[]) {
         }
         // Agora a variável caminhoTxt existe e podemos usá-la para gerar a saída textual;
         lerArqQry(formas, caminhoQry, caminhoTxt, dirSaida, nomeBase, nomeQrySemExt);
+
+        char caminhoSvgFinal[512];
+        snprintf(caminhoSvgFinal, sizeof(caminhoSvgFinal), "%s/%s-%s.svg", dirSaida, nomeBase, nomeQrySemExt);
+        printf("Gerando SVG final (apos .qry): %s\n", caminhoSvgFinal);
+        geraSvg(formas, caminhoSvgFinal);
     }
 
     printf("\nProcesso concluido!\n");

@@ -84,44 +84,73 @@ void lerArqQry(ListaFormas listaFormas, char* caminhoArqQry, char* caminhoSaidaT
             sscanf(linha, "lc %d %d", &c, &n); 
 
             if (c < 0 || c >= MAX_ARSENAL) {
-                fprintf(arqTxt, "  -> ERRO: ID %d de carregador e invalido (limite e %d).\n", c, MAX_ARSENAL - 1);
-                continue; // Código de segurança para acesso indevido da memória.
+                fprintf(arqTxt, "  -> ERRO: ID %d de carregador e invalido (limite e %d).\n", c, MAX_ARSENAL - 1);
+                continue; 
             }
 
             if (carregadores[c] == NULL) {
                 carregadores[c] = criarCarregador(); 
             }
-            
-            fprintf(arqTxt, "  -> OK: Carregando %d formas no carregador %d...\n", n, c); 
+
+            fprintf(arqTxt, "  -> OK: Carregando %d formas no carregador %d...\n", n, c); 
+
+
+            Lista tempLista = criarLista();
+            int formasCarregadasCount = 0;
+
             for (int i = 0; i < n; i++) {
                 No primeiroNo = getPrimeiroNoLista(listaFormas);
                 if (primeiroNo == NULL) {
-                    fprintf(arqTxt, "  -> AVISO: Nao ha mais formas no chao.\n");
+                    fprintf(arqTxt, "  -> AVISO: Nao ha mais formas no chao.\n");
                     break;
                 }
-                
                 void* forma = removeNoLista(listaFormas, primeiroNo);
-                carregaForma(carregadores[c], forma);
-                fprintf(arqTxt, "      -> Forma ID %d carregada.\n", getIdFormaGenerica(forma));
+                insereFinalLista(tempLista, forma); // tempLista agora tem [5, 6, ..., 24]
+                fprintf(arqTxt, "      -> Forma ID %d carregada.\n", getIdFormaGenerica(forma));
+                formasCarregadasCount++;
             }
 
+
+            while (getTamanhoLista(tempLista) > 0) {
+                No ultimoNo = getUltimoNoLista(tempLista);
+                void* forma = removeNoLista(tempLista, ultimoNo);
+                carregaForma(carregadores[c], forma); 
+            }
+
+            destroiLista(tempLista, NULL); 
+
+        
         } else if (strcmp(comando, "atch") == 0) {
             int d, cesq, cdir;
             sscanf(linha, "atch %d %d %d", &d, &cesq, &cdir); 
 
-            if (d < 0 || d >= MAX_ARSENAL) {
-                fprintf(arqTxt, "  -> ERRO: ID %d de disparador e invalido (limite e %d).\n", d, MAX_ARSENAL - 1);
+            if (d < 0 || d >= MAX_ARSENAL || disparadores[d] == NULL) {
+                fprintf(arqTxt, "  -> ERRO: Disparador %d e invalido ou nao existe (use 'pd' para cria-lo).\n", d);
                 continue; 
             }
 
-            if (disparadores[d] == NULL || carregadores[cesq] == NULL || carregadores[cdir] == NULL) {
-                fprintf(arqTxt, "  -> ERRO: Disparador ou Carregadores nao existem.\n");
-            } else {
-                anexaCarregadoresDisparador(disparadores[d], carregadores[cesq], carregadores[cdir]);
-                carregadores[cesq] = NULL;
-                carregadores[cdir] = NULL;
-                fprintf(arqTxt, "  -> OK: Disparador %d anexou carregadores %d (esq) e %d (dir)\n", d, cesq, cdir);
+            if (cesq < 0 || cesq >= MAX_ARSENAL) {
+                fprintf(arqTxt, "  -> ERRO: ID %d do carregador esquerdo e invalido.\n", cesq);
+                continue;
             }
+            if (carregadores[cesq] == NULL) {
+                fprintf(arqTxt, "  -> INFO: Carregador %d (esq) nao existia, criando vazio.\n", cesq);
+                carregadores[cesq] = criarCarregador(); // Cria implicitamente.
+            }
+
+            if (cdir < 0 || cdir >= MAX_ARSENAL) {
+                fprintf(arqTxt, "  -> ERRO: ID %d do carregador direito e invalido.\n", cdir);
+                continue;
+            }
+            if (carregadores[cdir] == NULL) {
+                fprintf(arqTxt, "  -> INFO: Carregador %d (dir) nao existia, criando vazio.\n", cdir);
+                carregadores[cdir] = criarCarregador(); // Cria implicitamente.
+            }
+
+            anexaCarregadoresDisparador(disparadores[d], carregadores[cesq], carregadores[cdir]);
+            carregadores[cesq] = NULL; // O disparador agora é "dono" deles.
+            carregadores[cdir] = NULL;
+            fprintf(arqTxt, "  -> OK: Disparador %d anexou carregadores %d (esq) e %d (dir)\n", d, cesq, cdir);
 
         } else if (strcmp(comando, "shft") == 0) {
             int d, n;
@@ -330,17 +359,39 @@ void lerArqQry(ListaFormas listaFormas, char* caminhoArqQry, char* caminhoSaidaT
     fclose(arqQry);
     fclose(arqTxt);
 
-    // Destrói todos os disparadores e carregadores que ainda existem.
+// Destrói todos os disparadores, carregadores e a arena.
     for (int i = 0; i < MAX_ARSENAL; i++) {
         if (disparadores[i] != NULL) {
-            destroiDisparador(disparadores[i]);
+
+        void* formaArmada = getFormaArmadaDisparador(disparadores[i]);
+        if (formaArmada != NULL) {
+            destroiFormaGenerica(formaArmada);
+        }
+
+
+        Carregador cEsq = getCarrEsquerdaDisparador(disparadores[i]);
+        while (cEsq != NULL && carregadorVazio(cEsq) == 0) {
+            destroiFormaGenerica(descarregaForma(cEsq));
+        }
+
+        Carregador cDir = getCarrDireitaDisparador(disparadores[i]);
+        while (cDir != NULL && carregadorVazio(cDir) == 0) {
+            destroiFormaGenerica(descarregaForma(cDir));
+        }
+
+
+        destroiDisparador(disparadores[i]);
         }
         if (carregadores[i] != NULL) {
+            while (carregadorVazio(carregadores[i]) == 0) {
+            destroiFormaGenerica(descarregaForma(carregadores[i]));
+        }
             destroiCarregador(carregadores[i]);
         }
     }
-    
-    // Destrói a arena (que destruirá a fila interna). 
-    // As formas do chão são destruídas no main.
+
+    while (arenaVazia(arena) == 0) {
+        destroiFormaGenerica(removeFormaArena(arena));
+    }
     destroiArena(arena);
 }

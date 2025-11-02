@@ -161,6 +161,6 @@ double calcAreaLinha(Linha l);
  *  
  * @return Ponteiro para a nova forma clonada. 
  */
-Linha clonarRetangulo(Linha l, int IDnovo);
+Linha clonarLinha(Linha l, int IDnovo);
 
 #endif
